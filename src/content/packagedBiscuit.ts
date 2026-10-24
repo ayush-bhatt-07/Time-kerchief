@@ -14,7 +14,7 @@ export const BISCUIT_SOURCES = [
     url: 'https://www.fssai.gov.in',
     publisher: 'Food Safety and Standards Authority of India (FSSAI)',
     verifiedAt: '2026-09-10',
-    reviewer: 'Tanushree Dhawan (Lead Nutritional Reviewer)',
+    reviewer: 'Nutritional Verification Committee',
   },
   {
     id: 'src-biscuit-label-photo',
@@ -22,7 +22,7 @@ export const BISCUIT_SOURCES = [
     title: 'Commercial Packaged Glucose & Malted Biscuit Retail Foil Wrapper Specimen #TK-BIS-1026',
     assetPath: '/assets/aistudio/Image_1_300befd0.png',
     verifiedAt: '2026-10-18',
-    reviewer: 'Kartik Aggarwal (Artifact Inspector)',
+    reviewer: 'Technical Standards Inspector',
   },
   {
     id: 'src-cftri-milling',
@@ -30,7 +30,7 @@ export const BISCUIT_SOURCES = [
     title: 'Industrial Grain Milling and Continuous Tunnel Oven Baking Monograph',
     publisher: 'Central Food Technological Research Institute (CFTRI)',
     verifiedAt: '2026-08-14',
-    reviewer: 'Ayush Bhatt (Curriculum Crosswalk Lead)',
+    reviewer: 'Curriculum Review Committee',
   },
   {
     id: 'src-fao-wheat',
@@ -39,7 +39,7 @@ export const BISCUIT_SOURCES = [
     url: 'https://www.fao.org/agriculture/grain',
     publisher: 'Food and Agriculture Organization (FAO)',
     verifiedAt: '2026-09-25',
-    reviewer: 'Aryan Das (Media Reviewer)',
+    reviewer: 'Digital Archive Reviewer',
   },
 ];
 

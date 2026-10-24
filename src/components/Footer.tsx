@@ -14,10 +14,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
       <div className="w-full px-6 lg:px-12 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="flex flex-col gap-1 max-w-2xl">
           <div className="font-headline text-base font-bold text-[#1b1c1a] tracking-tight">
-            Time-Kerchief — BVP Promptaethon 2025 • Educational Manufacturing History Explorer
+            Time-Kerchief — Educational Manufacturing History Explorer
           </div>
           <p className="font-body text-xs text-[#565e74]">
-            Team Doraemon (Ayush Bhatt, Kartik Aggarwal, Tanushree Dhawan, Aryan Das). Curated educational reference for Classes 8–12. Non-commercial, illustrative manufacturing workflows.
+            Curated educational reference for Classes 8–12. Non-commercial, illustrative manufacturing workflows.
           </p>
         </div>
 

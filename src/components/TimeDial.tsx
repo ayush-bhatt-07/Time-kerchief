@@ -369,6 +369,7 @@ export const TimeDial: React.FC<TimeDialProps> = ({
             <button
               key={stage.id}
               type="button"
+              aria-label={String(stage.number)}
               onClick={() => handleMarkerClick(stage.number)}
               title={stage.title}
               style={{
@@ -385,7 +386,10 @@ export const TimeDial: React.FC<TimeDialProps> = ({
             >
               <span>{stage.number}</span>
               {/* Tooltip on hover */}
-              <span className="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity absolute -top-8 whitespace-nowrap bg-[#1b1c1a] text-white text-[10px] px-2 py-0.5 rounded shadow-lg font-mono-epoch z-50">
+              <span
+                aria-hidden="true"
+                className="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity absolute -top-8 whitespace-nowrap bg-[#1b1c1a] text-white text-[10px] px-2 py-0.5 rounded shadow-lg font-mono-epoch z-50"
+              >
                 {stage.number}: {stage.title.split(':')[1]?.trim() || stage.title}
               </span>
             </button>

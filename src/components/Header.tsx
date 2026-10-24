@@ -48,7 +48,7 @@ export const Header: React.FC<HeaderProps> = ({
                 Time-Kerchief
               </span>
               <span className="font-mono-epoch text-[11px] text-[#5c3f40] tracking-wider uppercase mt-1 font-semibold">
-                Team Doraemon
+                Manufacturing History Explorer
               </span>
             </div>
           </button>

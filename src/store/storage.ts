@@ -8,7 +8,7 @@ import { ProductId, QuizAnswer, QuizRun, UserProgressState } from '../types/cont
 
 const STORAGE_KEY = 'tk-core-v3';
 export const CURRENT_SCHEMA_VERSION = 3;
-export const CURRENT_CONTENT_VERSION = 'v3.0-bvp-doraemon';
+export const CURRENT_CONTENT_VERSION = 'v3.0-curated';
 
 function generateRandomId(prefix: string): string {
   return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 7)}`;

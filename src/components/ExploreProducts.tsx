@@ -88,7 +88,7 @@ export const ExploreProducts: React.FC<ExploreProductsProps> = ({
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#efeeeb] text-[#5c3f40] shadow-sm border border-[#e4e2df]">
               <span className="inline-block w-2 h-2 rounded-full bg-[#b80035] animate-pulse"></span>
               <span className="font-mono-epoch text-xs uppercase tracking-wider text-[#b80035] font-bold">
-                Team Doraemon
+                Manufacturing Timeline
               </span>
               <span className="text-[#906f70]">•</span>
               <span className="font-body text-xs text-[#1b1c1a] font-medium">

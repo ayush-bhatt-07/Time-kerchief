@@ -13,7 +13,7 @@ export const AboutExhibit: React.FC = () => {
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-[#b80035] text-[24px]">museum</span>
             <span className="font-mono-epoch text-xs text-[#b80035] font-bold uppercase tracking-wider">
-              Curatorial Statement • Team Doraemon
+              Curatorial Statement • Educational Exhibit
             </span>
           </div>
           <h2 className="font-headline text-3xl sm:text-4xl font-extrabold text-[#1b1c1a] tracking-tight">
@@ -24,27 +24,27 @@ export const AboutExhibit: React.FC = () => {
           </p>
         </div>
 
-        {/* Team Doraemon Attribution */}
+        {/* Curatorial Focus */}
         <div className="p-5 rounded-2xl bg-[#f5f3f0] border border-[#e4e2df] flex flex-col gap-3">
           <span className="font-mono-epoch text-xs font-bold text-[#1b1c1a] uppercase tracking-wider">
-            Team Doraemon • BVP Promptaethon 2025
+            Exhibit Scope & Core Learning Pillars
           </span>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
             <div className="p-3 rounded-xl bg-white border border-[#e4e2df]">
-              <span className="font-bold text-[#1b1c1a] block">Ayush Bhatt</span>
-              <span className="text-[#565e74]">Team Leader & Architecture</span>
+              <span className="font-bold text-[#1b1c1a] block">Botanical & Farm Origins</span>
+              <span className="text-[#565e74]">Agricultural cultivation & harvesting biology</span>
             </div>
             <div className="p-3 rounded-xl bg-white border border-[#e4e2df]">
-              <span className="font-bold text-[#1b1c1a] block">Kartik Aggarwal</span>
-              <span className="text-[#565e74]">Artifact & Dial Integration</span>
+              <span className="font-bold text-[#1b1c1a] block">Human Craftsmanship</span>
+              <span className="text-[#565e74]">Occupational health, skills & dignity of labor</span>
             </div>
             <div className="p-3 rounded-xl bg-white border border-[#e4e2df]">
-              <span className="font-bold text-[#1b1c1a] block">Tanushree Dhawan</span>
-              <span className="text-[#565e74]">Curriculum & Evidence Review</span>
+              <span className="font-bold text-[#1b1c1a] block">Industrial Machinery</span>
+              <span className="text-[#565e74]">Mechanical workflows & resource efficiency</span>
             </div>
             <div className="p-3 rounded-xl bg-white border border-[#e4e2df]">
-              <span className="font-bold text-[#1b1c1a] block">Aryan Das</span>
-              <span className="text-[#565e74]">Media & Standards Verification</span>
+              <span className="font-bold text-[#1b1c1a] block">Scientific Standards</span>
+              <span className="text-[#565e74]">Verified physical label & lab monograph data</span>
             </div>
           </div>
         </div>

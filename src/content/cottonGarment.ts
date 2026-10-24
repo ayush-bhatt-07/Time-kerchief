@@ -14,7 +14,7 @@ export const COTTON_SOURCES = [
     url: 'https://www.iso.org/standard/39665.html',
     publisher: 'International Organization for Standardization',
     verifiedAt: '2026-09-15',
-    reviewer: 'Tanushree Dhawan (Lead Educational Reviewer)',
+    reviewer: 'Educational Standards Board',
   },
   {
     id: 'src-cbse-fibre-fabric',
@@ -22,7 +22,7 @@ export const COTTON_SOURCES = [
     title: 'CBSE Secondary Curriculum: Fibre to Fabric & Applied Manufacturing Technology',
     publisher: 'National Council of Educational Research and Training (NCERT)',
     verifiedAt: '2026-08-20',
-    reviewer: 'Ayush Bhatt (Curriculum Crosswalk Lead)',
+    reviewer: 'Curriculum Review Committee',
   },
   {
     id: 'src-tag-specimen',
@@ -30,7 +30,7 @@ export const COTTON_SOURCES = [
     title: 'Physical Cotton Garment Wash & Care Tag Specimen #TK-COT-0824',
     assetPath: '/assets/aistudio/Image_7_90a1b3dd.png',
     verifiedAt: '2026-10-18',
-    reviewer: 'Kartik Aggarwal (Artifact Inspector)',
+    reviewer: 'Technical Standards Inspector',
   },
   {
     id: 'src-textile-archive',
@@ -39,7 +39,7 @@ export const COTTON_SOURCES = [
     url: 'https://open-textiles.org/archive/cotton-knitting',
     publisher: 'Textile Heritage Foundation',
     verifiedAt: '2026-09-30',
-    reviewer: 'Aryan Das (Media Reviewer)',
+    reviewer: 'Digital Archive Reviewer',
   },
 ];
 
