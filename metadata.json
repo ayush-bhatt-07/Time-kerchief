@@ -1,0 +1,8 @@
+{
+  "name": "Time-Kerchief",
+  "description": "Time-Kerchief Core MVP v3.0: Interactive educational manufacturing time-dial explorer reverse-engineering everyday cotton garments and packaged biscuits to raw organic origins.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

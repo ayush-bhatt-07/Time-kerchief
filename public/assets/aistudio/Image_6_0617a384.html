@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>Time-Kerchief — Manufacturing History Explorer</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,600;0,700;0,800;1,600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }
+  .dial-outer-shadow {
+    box-shadow: 0 20px 45px -10px rgba(19, 27, 46, 0.12), 0 0 0 1px rgba(144, 111, 112, 0.18), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+  }
+  .brass-rivet {
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.25);
+  }
+  .stage-node-btn {
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .needle-assembly {
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.28));
+  }
+</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-bright": "#fbf9f6", "on-secondary-fixed-variant": "#3f465c", "primary-fixed": "#ffdada", "tertiary-fixed-dim": "#93ccff", "background": "#fbf9f6", "surface-container-high": "#eae8e5", "outline-variant": "#e5bdbe", "on-primary-fixed": "#40000c", "on-primary": "#ffffff", "on-tertiary-fixed": "#001d31", "tertiary": "#006093", "secondary": "#565e74", "on-surface-variant": "#5c3f40", "error-container": "#ffdad6", "surface-container": "#efeeeb", "on-secondary-fixed": "#131b2e", "primary-fixed-dim": "#ffb3b6", "surface-container-lowest": "#ffffff", "primary": "#b80035", "on-tertiary-fixed-variant": "#004b73", "secondary-container": "#dae2fd", "surface-variant": "#e4e2df", "inverse-primary": "#ffb3b6", "on-primary-fixed-variant": "#920028", "on-tertiary-container": "#fbfbff", "surface-container-highest": "#e4e2df", "inverse-on-surface": "#f2f0ed", "surface": "#fbf9f6", "on-surface": "#1b1c1a", "surface-dim": "#dbdad7", "secondary-fixed-dim": "#bec6e0", "inverse-surface": "#30312f", "on-secondary": "#ffffff", "outline": "#906f70", "surface-container-low": "#f5f3f0", "on-background": "#1b1c1a", "secondary-fixed": "#dae2fd", "surface-tint": "#be0037", "on-secondary-container": "#5c647a", "tertiary-fixed": "#cce5ff", "on-tertiary": "#ffffff", "on-primary-container": "#fffaf9", "on-error": "#ffffff", "tertiary-container": "#007ab8", "error": "#ba1a1a", "primary-container": "#e11d48", "on-error-container": "#93000a" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "margin": "3rem", "margin-mobile": "1.25rem", "space-md": "1rem", "space-sm": "0.5rem", "gutter-mobile": "1rem", "space-lg": "1.5rem", "gutter": "1.5rem", "space-xl": "2.5rem" }, "fontFamily": { "headline-xl": [ "Epilogue" ], "label-lg": [ "Plus Jakarta Sans" ], "display-hero": [ "Epilogue" ], "label-md": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ], "headline-md": [ "Epilogue" ], "headline-xl-mobile": [ "Epilogue" ], "label-mono-epoch": [ "Space Grotesk" ], "body-sm": [ "Plus Jakarta Sans" ], "headline-lg": [ "Epilogue" ], "body-md": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "display-hero-mobile": [ "Epilogue" ] }, "fontSize": { "headline-xl": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "label-lg": [ "14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" } ], "display-hero": [ "56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "800" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700" } ], "body-lg": [ "18px", { "lineHeight": "28px", "fontWeight": "400" } ], "headline-md": [ "24px", { "lineHeight": "32px", "fontWeight": "600" } ], "headline-xl-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "label-mono-epoch": [ "13px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "700" } ], "body-sm": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "headline-lg": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "body-md": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "headline-sm": [ "20px", { "lineHeight": "28px", "fontWeight": "700" } ], "display-hero-mobile": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "800" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed min-h-screen flex flex-col"><header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 w-full px-gutter lg:px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><a class="flex items-center gap-space-sm group focus:outline-none" data-path="explore-products" href="#"><img alt="Time-Kerchief Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WiWWn0nldb26nP5enwr_FFhDW0w4sgGTypeAt4-2vvfiABZlFymYn3VhpjZ0eCL-pA7dwRsgftLc6dK_kvb7FMRGohfMa03WKBIVOSDoAFdt48kH4ReBmKWlGFHLQWwHjws8LHKvylfpkohs8Fz9JbGjvfOaaKveJ9beOB-3xU3ovld7ypdurI5cro1DfwDmG4jigEwntqGWINsbJEgUxVXFMTEw8WO2ppqE1bNWBs5U0WxFFwX8XxfQ"/><div class="flex flex-col"><span class="font-headline-md text-headline-md text-on-surface tracking-tight leading-none group-hover:text-primary transition-colors">Time-Kerchief</span><span class="font-label-mono-epoch text-label-mono-epoch text-on-surface-variant tracking-wider uppercase mt-space-xs">Core MVP v3.0 • Team Doraemon</span></div></a><div class="hidden xl:block h-8 w-px bg-surface-variant mx-space-xs"></div><nav class="hidden lg:flex items-center gap-space-xs bg-surface-container-low p-1 rounded-full" data-active-classes="bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-full shadow-sm"><a aria-current="page" class="px-space-md py-space-sm transition-all bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-full shadow-sm" data-path="explore-products" href="#">Explore Products</a><a class="px-space-md py-space-sm rounded-full font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-all" data-path="how-it-works" href="#">How It Works</a><a class="px-space-md py-space-sm rounded-full font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-all" data-path="learning-progress" href="#">Learning Progress</a></nav></div><div class="flex items-center gap-space-sm"><div class="hidden sm:flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-fixed font-label-md text-label-md"><span class="material-symbols-outlined text-[15px] text-tertiary">school</span><span class="tracking-wide">SDG 8 &amp; 9 Edu</span></div><button aria-label="Toggle Color Scheme" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">contrast</span></button><a class="hidden sm:inline-flex items-center justify-center px-space-md py-space-sm rounded-full bg-surface-container-high text-on-surface font-label-lg text-label-lg hover:bg-surface-variant transition-colors" data-path="about-exhibit" href="#">About Exhibit</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-space-xs"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface flex-1"><div class="flex flex-col w-full">
+<!-- Sub-navigation Bar & Breadcrumb Header -->
+<section class="w-full bg-surface-container-low py-space-md shadow-sm border-b border-surface-container-high">
+<div class="w-full px-gutter lg:px-margin flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<!-- Breadcrumb Hierarchy -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 overflow-x-auto min-w-0">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 shrink-0" href="#">
+<span class="material-symbols-outlined text-[16px]">travel_explore</span>
+<span>Explore Products</span>
+</a>
+<span class="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+<span class="font-label-md text-label-md text-secondary truncate shrink-0">Cotton Garment (T-Shirt / Everyday Top)</span>
+<span class="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+<span class="font-label-md text-label-md text-primary font-bold shrink-0">Rewind Journey</span>
+</nav>
+<!-- View Selector Tabs -->
+<div class="flex items-center gap-1.5 p-1 bg-surface-container rounded-full self-start md:self-auto">
+<a class="flex items-center gap-2 px-space-md py-1.5 rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg shadow-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span>Rewind Journey</span>
+<span class="w-2 h-2 rounded-full bg-surface-container-lowest animate-pulse"></span>
+</a>
+<a class="flex items-center gap-2 px-space-md py-1.5 rounded-full text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">sell</span>
+<span>Decode Label</span>
+</a>
+<a class="flex items-center gap-2 px-space-md py-1.5 rounded-full text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">quiz</span>
+<span>Check Learning</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Main Temporal Stage Grid -->
+<section class="w-full px-gutter lg:px-margin py-space-xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- LEFT COLUMN: Heroic Scientific Instrument Dial Console (Columns 1-5) -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- Tactile Precision Chrono-Kerchief Instrument Console -->
+<div class="bg-surface-container-lowest dial-outer-shadow rounded-2xl border border-surface-variant relative overflow-hidden flex flex-col p-6 sm:p-7">
+<!-- Metallic Bezel Corner Fasteners / Screws -->
+<div class="absolute top-3.5 left-3.5 w-3 h-3 rounded-full bg-surface-variant border border-outline/30 flex items-center justify-center brass-rivet pointer-events-none">
+<div class="w-1.5 h-0.5 bg-outline/60"></div>
+</div>
+<div class="absolute top-3.5 right-3.5 w-3 h-3 rounded-full bg-surface-variant border border-outline/30 flex items-center justify-center brass-rivet pointer-events-none">
+<div class="w-1.5 h-0.5 bg-outline/60 rotate-45"></div>
+</div>
+<div class="absolute bottom-3.5 left-3.5 w-3 h-3 rounded-full bg-surface-variant border border-outline/30 flex items-center justify-center brass-rivet pointer-events-none">
+<div class="w-1.5 h-0.5 bg-outline/60 -rotate-45"></div>
+</div>
+<div class="absolute bottom-3.5 right-3.5 w-3 h-3 rounded-full bg-surface-variant border border-outline/30 flex items-center justify-center brass-rivet pointer-events-none">
+<div class="w-1.5 h-0.5 bg-outline/60 rotate-90"></div>
+</div>
+<!-- Engraved Brass / Enamel Scientific Nameplate -->
+<div class="w-full rounded-lg bg-gradient-to-r from-surface-container via-surface-container-high to-surface-container border border-outline-variant/60 px-4 py-2.5 flex items-center justify-between mb-4 shadow-inner">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-mono-epoch text-[11px] font-bold text-on-surface tracking-wider">CHRONO-KERCHIEF // MK-IV</span>
+</div>
+<div class="font-label-mono-epoch text-[10px] text-on-surface-variant font-semibold uppercase tracking-widest flex items-center gap-1.5">
+<span>ARC: 270° CALIBRATED</span>
+<span class="text-outline">•</span>
+<span class="text-tertiary">SER. #TK-0824-ED</span>
+</div>
+</div>
+<!-- Secondary Header / Instrument State -->
+<div class="w-full flex items-center justify-between pb-2 px-1">
+<div>
+<h2 class="font-headline-sm text-[18px] text-on-surface tracking-tight font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]">explore</span>
+      TEMPORAL REWIND DIAL
+    </h2>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-0.5">Non-looping sequence: 1 (Cultivation) to 8 (Finished)</p>
+</div>
+<span class="px-2.5 py-1 rounded bg-secondary-container/80 text-on-secondary-fixed font-label-mono-epoch text-[11px] font-bold tracking-wide border border-secondary-fixed-dim/40 shadow-sm">
+    REV. MODE ◀
+  </span>
+</div>
+<!-- Dynamic Stage Callout Badge -->
+<div class="w-full py-2 px-3 rounded-md bg-surface-container-low border border-outline-variant/40 flex items-center justify-between my-2 shadow-sm" id="dial-stage-indicator">
+<span class="font-label-mono-epoch text-[12px] text-primary tracking-wider font-bold uppercase flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+    STAGE 8 OF 8 • FINISHED ARTIFACT
+  </span>
+<span class="font-label-mono-epoch text-[11px] text-secondary font-semibold" id="dial-degree-indicator">270° / 270°</span>
+</div>
+<!-- Tactile Scientific Chrono-Kerchief Centerpiece (360x360 px canvas) -->
+<div class="relative w-full max-w-[360px] h-[360px] mx-auto flex items-center justify-center select-none my-2">
+<!-- Concentric Outer Horological Enamel & Steel Ring -->
+<div class="absolute inset-2 rounded-full border-4 border-surface-variant bg-surface-container-lowest/60 shadow-[inset_0_4px_12px_rgba(0,0,0,0.06),0_10px_25px_rgba(0,0,0,0.05)]"></div>
+<div class="absolute inset-5 rounded-full border border-dashed border-outline-variant/60 pointer-events-none"></div>
+<!-- Calibrated Arc SVG (270° bounded arc, open 90° mechanical gap at bottom-right) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" viewbox="0 0 360 360">
+<defs>
+<lineargradient id="arcGlowGradient" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#006093"></stop>
+<stop offset="50%" stop-color="#dae2fd"></stop>
+<stop offset="100%" stop-color="#b80035"></stop>
+</lineargradient>
+<filter height="140%" id="crimsonGlow" width="140%" x="-20%" y="-20%">
+<fedropshadow dx="0" dy="2" flood-color="#e11d48" flood-opacity="0.4" stddeviation="3"></fedropshadow>
+</filter>
+</defs>
+<!-- Background Track Ring (270 degrees = 3/4 circle) -->
+<!-- R=132, Circumference = 829.38. 270 deg = 622.03. Gap = 207.35. Arc rotated so gap is bottom right (45° to 135°) -->
+<circle cx="180" cy="180" fill="none" r="132" stroke="#e4e2df" stroke-dasharray="622.03 829.38" stroke-dashoffset="518.36" stroke-linecap="round" stroke-width="12"></circle>
+<!-- Active Temporal Gauge Track Fill -->
+<circle class="transition-all duration-500 ease-out" cx="180" cy="180" fill="none" id="gauge-fill" r="132" stroke="#b80035" stroke-dasharray="622.03 829.38" stroke-dashoffset="518.36" stroke-linecap="round" stroke-width="12"></circle>
+<!-- Calibrated Scientific Hairline & Degree Sub-Ticks (135° to 405°) -->
+<!-- 0° mark at Stage 1 (~135° standard), up to 270° at Stage 8 (~45°/405°) -->
+<!-- Major markers at 0°, 45°, 90°, 135°, 180°, 225°, 270° -->
+<g opacity="0.65" stroke="#906f70" stroke-linecap="round">
+<!-- 135° (Stage 1 / 0° mark) -->
+<line stroke-width="2.5" x1="86.7" x2="95.2" y1="273.3" y2="264.8"></line>
+<!-- 173.57° (Stage 2) -->
+<line stroke-width="2.5" x1="48.5" x2="60.4" y1="194.8" y2="193.5"></line>
+<!-- 212.14° (Stage 3) -->
+<line stroke-width="2.5" x1="68.2" x2="77.8" y1="109.4" y2="115.8"></line>
+<!-- 250.71° (Stage 4) -->
+<line stroke-width="2.5" x1="136.4" x2="140.4" y1="55.2" y2="66.6"></line>
+<!-- 289.28° (Stage 5) -->
+<line stroke-width="2.5" x1="223.6" x2="219.6" y1="55.2" y2="66.6"></line>
+<!-- 327.85° (Stage 6) -->
+<line stroke-width="2.5" x1="291.8" x2="282.2" y1="109.4" y2="115.8"></line>
+<!-- 366.42° (Stage 7) -->
+<line stroke-width="2.5" x1="311.5" x2="299.6" y1="194.8" y2="193.5"></line>
+<!-- 405° / 45° (Stage 8 / 270° mark) -->
+<line stroke-width="2.5" x1="273.3" x2="264.8" y1="273.3" y2="264.8"></line>
+<!-- Intermediate fine degree ticks -->
+<line stroke-width="1" x1="63.5" x2="70.5" y1="236.4" y2="231.5"></line>
+<line stroke-width="1" x1="48.2" x2="56.1" y1="151.7" y2="153.8"></line>
+<line stroke-width="1" x1="97.4" x2="103.5" y1="78.1" y2="85.2"></line>
+<line stroke-width="1.5" x1="180.0" x2="180.0" y1="48.0" y2="58.0"></line>
+<line stroke-width="1" x1="262.6" x2="256.5" y1="78.1" y2="85.2"></line>
+<line stroke-width="1" x1="311.8" x2="303.9" y1="151.7" y2="153.8"></line>
+<line stroke-width="1" x1="296.5" x2="289.5" y1="236.4" y2="231.5"></line>
+</g>
+<!-- Mechanical Stop Buffer Wall at 90° Gap (Non-Looping Enforcement) -->
+<path d="M 180 300 L 180 326" stroke="#906f70" stroke-dasharray="3 3" stroke-width="2"></path>
+<text fill="#906f70" font-family="'Space Grotesk', sans-serif" font-size="9" font-weight="700" letter-spacing="1" text-anchor="middle" x="180" y="340">MECHANICAL STOP • 90° GAP</text>
+</svg>
+<!-- Mechanical Indicator Needle & Counterweight Hand (Rotates from center) -->
+<div class="absolute w-full h-full flex items-center justify-center pointer-events-none transition-transform duration-500 ease-out needle-assembly" id="chronometer-needle" style="transform: rotate(225deg);">
+<!-- Tapered Instrument Needle Pointer Blade -->
+<div class="relative w-2.5 h-[134px] -translate-y-[67px] flex flex-col items-center justify-start">
+<!-- Fine Needle Tip pointing to active node -->
+<div class="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[14px] border-b-primary -mt-2"></div>
+<!-- Needle Spine with Embossed Alignment Line -->
+<div class="w-1.5 h-full bg-gradient-to-b from-primary via-primary-container to-on-surface rounded-full flex items-center justify-center">
+<div class="w-0.5 h-4/5 bg-primary-fixed-dim/70 rounded-full"></div>
+</div>
+</div>
+<!-- Counterweight Tail with Calibrated Teardrop -->
+<div class="absolute w-3.5 h-9 bg-on-surface rounded-full translate-y-7 shadow-md flex items-center justify-center opacity-90 border border-outline/40">
+<div class="w-1.5 h-1.5 rounded-full bg-surface-container-high"></div>
+</div>
+</div>
+<!-- Central Recessed Instrument Hub (Deep Bevel with Dial Display) -->
+<div class="z-20 w-32 h-32 rounded-full bg-gradient-to-b from-surface-container-lowest to-surface-container shadow-[0_4px_16px_rgba(0,0,0,0.12),inset_0_2px_4px_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(0,0,0,0.15)] flex flex-col items-center justify-center text-center p-2.5 border-2 border-surface-variant relative">
+<!-- Knurled Brass/Steel Center Jewel Bearing -->
+<div class="w-7 h-7 rounded-full bg-gradient-to-br from-primary via-primary-container to-on-primary-fixed shadow-md border-2 border-surface-container-lowest flex items-center justify-center mb-1">
+<div class="w-2.5 h-2.5 rounded-full bg-primary-fixed shadow-inner animate-pulse"></div>
+</div>
+<!-- Hub Dynamic Readout -->
+<span class="font-label-mono-epoch text-[9px] text-tertiary uppercase font-bold tracking-wider" id="hub-displacement">0 HRS • PRESENT</span>
+<span class="font-label-mono-epoch text-[11px] text-on-surface font-extrabold leading-tight mt-0.5" id="center-era-tag">RETAIL<br/>READY</span>
+<span class="font-label-mono-epoch text-[8px] text-on-surface-variant uppercase tracking-widest mt-0.5">NODE 8 / 8</span>
+</div>
+<!-- 8 Tactile Stage Markers (Nodes 1 to 8) along the 270° arc -->
+<!-- Node 1: Cotton Cultivation (135° -> x: 86.7, y: 273.3) -->
+<button class="stage-node stage-node-btn group absolute z-30 w-8 h-8 -ml-4 -mt-4 rounded-full bg-surface-container-high hover:bg-surface-variant border border-outline/30 flex items-center justify-center font-label-mono-epoch text-xs text-on-surface transition-all shadow-sm active:scale-95" data-node="1" onclick="selectStage(1)" style="top: 273px; left: 87px;" title="Stage 1: Cotton Cultivation &amp; Harvesting" type="button">
+<span>1</span>
+<span class="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity absolute -top-7 whitespace-nowrap bg-on-surface text-surface text-[10px] px-2 py-0.5 rounded shadow font-label-mono-epoch">1: Cultivation</span>
+</button>
+<!-- Node 2: Fibre Preparation (173.57° -> x: 48.5, y: 194.8) -->
+<button class="stage-node stage-node-btn group absolute z-30 w-8 h-8 -ml-4 -mt-4 rounded-full bg-surface-container-high hover:bg-surface-variant border border-outline/30 flex items-center justify-center font-label-mono-epoch text-xs text-on-surface transition-all shadow-sm active:scale-95" data-node="2" onclick="selectStage(2)" style="top: 195px; left: 48px;" title="Stage 2: Fibre Preparation (Ginning &amp; Carding)" type="button">
+<span>2</span>
+<span class="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity absolute -top-7 whitespace-nowrap bg-on-surface text-surface text-[10px] px-2 py-0.5 rounded shadow font-label-mono-epoch">2: Ginning &amp; Carding</span>
+</button>
+<!-- Node 3: Spinning (212.14° -> x: 68.2, y: 109.4) -->
+<button class="stage-node stage-node-btn group absolute z-30 w-8 h-8 -ml-4 -mt-4 rounded-full bg-surface-container-high hover:bg-surface-variant border border-outline/30 flex items-center justify-center font-label-mono-epoch text-xs text-on-surface transition-all shadow-sm active:scale-95" data-node="3" onclick="selectStage(3)" style="top: 109px; left: 68px;" title="Stage 3: Spinning (Yarn Production)" type="button">
+<span>3</span>
+<span class="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity absolute -top-7 whitespace-nowrap bg-on-surface text-surface text-[10px] px-2 py-0.5 rounded shadow font-label-mono-epoch">3: Spinning (Yarn)</span>
+</button>
+<!-- Node 4: Fabric Formation (250.71° -> x: 136.4, y: 55.2) -->
+<button class="stage-node stage-node-btn group absolute z-30 w-8 h-8 -ml-4 -mt-4 rounded-full bg-surface-container-high hover:bg-surface-variant border border-outline/30 flex items-center justify-center font-label-mono-epoch text-xs text-on-surface transition-all shadow-sm active:scale-95" data-node="4" onclick="selectStage(4)" style="top: 55px; left: 136px;" title="Stage 4: Fabric Formation (Knitting / Weaving)" type="button">
+<span>4</span>
+<span class="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity absolute -top-7 whitespace-nowrap bg-on-surface text-surface text-[10px] px-2 py-0.5 rounded shadow font-label-mono-epoch">4: Knit &amp; Weave</span>
+</button>
+<!-- Node 5: Wet Processing (289.28° -> x: 223.6, y: 55.2) -->
+<button class="stage-node stage-node-btn group absolute z-30 w-8 h-8 -ml-4 -mt-4 rounded-full bg-surface-container-high hover:bg-surface-variant border border-outline/30 flex items-center justify-center font-label-mono-epoch text-xs text-on-surface transition-all shadow-sm active:scale-95" data-node="5" onclick="selectStage(5)" style="top: 55px; left: 224px;" title="Stage 5: Wet Processing (Finishing &amp; Dyeing)" type="button">
+<span>5</span>
+<span class="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity absolute -top-7 whitespace-nowrap bg-on-surface text-surface text-[10px] px-2 py-0.5 rounded shadow font-label-mono-epoch">5: Finishing &amp; Dyeing</span>
+</button>
+<!-- Node 6: Pattern Cutting (327.85° -> x: 291.8, y: 109.4) -->
+<button class="stage-node stage-node-btn group absolute z-30 w-8 h-8 -ml-4 -mt-4 rounded-full bg-surface-container-high hover:bg-surface-variant border border-outline/30 flex items-center justify-center font-label-mono-epoch text-xs text-on-surface transition-all shadow-sm active:scale-95" data-node="6" onclick="selectStage(6)" style="top: 109px; left: 292px;" title="Stage 6: Pattern Cutting &amp; Marker Making" type="button">
+<span>6</span>
+<span class="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity absolute -top-7 whitespace-nowrap bg-on-surface text-surface text-[10px] px-2 py-0.5 rounded shadow font-label-mono-epoch">6: Pattern Cutting</span>
+</button>
+<!-- Node 7: Stitching & Assembly (366.42° -> x: 311.5, y: 194.8) -->
+<button class="stage-node stage-node-btn group absolute z-30 w-8 h-8 -ml-4 -mt-4 rounded-full bg-surface-container-high hover:bg-surface-variant border border-outline/30 flex items-center justify-center font-label-mono-epoch text-xs text-on-surface transition-all shadow-sm active:scale-95" data-node="7" onclick="selectStage(7)" style="top: 195px; left: 312px;" title="Stage 7: Stitching &amp; Garment Assembly" type="button">
+<span>7</span>
+<span class="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity absolute -top-7 whitespace-nowrap bg-on-surface text-surface text-[10px] px-2 py-0.5 rounded shadow font-label-mono-epoch">7: Stitching &amp; Assembly</span>
+</button>
+<!-- Node 8: Finished Garment (405°/45° -> x: 273.3, y: 273.3) [ACTIVE INITIAL] -->
+<button class="stage-node active-node stage-node-btn group absolute z-30 w-10 h-10 -ml-5 -mt-5 rounded-full bg-primary text-on-primary ring-4 ring-primary-fixed shadow-[0_4px_12px_rgba(184,0,53,0.35)] flex items-center justify-center font-label-mono-epoch text-sm font-bold transition-all" data-node="8" onclick="selectStage(8)" style="top: 273px; left: 273px;" title="Stage 8: Finished Garment (Retail Inspection &amp; Packaging)" type="button">
+<span>8</span>
+<span class="pointer-events-none opacity-100 absolute -bottom-6 whitespace-nowrap bg-primary text-on-primary text-[9px] px-2 py-0.5 rounded-full shadow font-label-mono-epoch uppercase font-bold tracking-wider">FINISHED</span>
+</button>
+</div>
+<!-- Tactile Rewind & Advance Rocker Controls -->
+<div class="w-full flex items-center justify-between gap-3 pt-3">
+<button class="flex-1 flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-surface-container hover:bg-surface-variant border border-outline-variant/40 text-on-surface font-label-lg text-[13px] transition-transform active:scale-95 shadow-sm" id="btn-rewind-step" onclick="rewindOneStep()" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">fast_rewind</span>
+<span>◀ Rewind (-1 Stage)</span>
+</button>
+<button class="flex-1 flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-surface-container-low border border-outline-variant/20 text-outline cursor-not-allowed font-label-lg text-[13px] transition-transform" disabled="" id="btn-advance-step" onclick="advanceOneStep()" type="button">
+<span>Advance (+1 Stage) ▶</span>
+<span class="material-symbols-outlined text-[18px]">fast_forward</span>
+</button>
+</div>
+<!-- Continuous Rewind / Quick Scrub Action -->
+<button class="w-full mt-2.5 py-2 px-3 rounded-lg bg-surface-container-high/60 hover:bg-surface-container-highest border border-outline-variant/30 text-on-surface-variant font-label-mono-epoch text-[11px] flex items-center justify-center gap-1.5 transition-colors" onclick="autoRewindSequence()" type="button">
+<span class="material-symbols-outlined text-[15px] text-tertiary">replay</span>
+<span>Continuous Time-Travel Rewind (Autoplay)</span>
+</button>
+<!-- Linear Slider Fallback for Accessibility / Keyboard Scrub -->
+<div class="w-full mt-4 pt-3 border-t border-surface-container-high flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+      Accessible Linear Scrub
+    </span>
+<span class="font-label-mono-epoch text-label-mono-epoch text-primary font-bold" id="slider-readout">Node 8 / 8</span>
+</div>
+<input aria-label="Temporal stage scrubber" class="w-full accent-primary h-2 bg-surface-container rounded-lg cursor-pointer" id="stage-range" max="8" min="1" oninput="handleSliderChange(this.value)" step="1" type="range" value="8"/>
+<div class="flex justify-between font-label-mono-epoch text-[10px] text-on-surface-variant px-0.5 uppercase tracking-wide">
+<span>Node 1: Raw Origin</span>
+<span>Node 4: Greige Fabric</span>
+<span>Node 8: Retail Garment</span>
+</div>
+</div>
+</div>
+<!-- Curricular Metadata Snapshot Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl border border-surface-variant shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[20px] text-primary">science</span>
+<span class="font-label-lg text-label-lg font-bold">Curriculum Alignment Context</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+    Class 9 &amp; 10 Science (Fibre to Fabric) and Class 11 Vocational Technology. This temporal model traces post-consumer and finished retail garments backward to raw agricultural biomass.
+  </p>
+<div class="flex flex-wrap items-center gap-2 pt-1">
+<span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed font-label-mono-epoch text-[11px] font-bold">CBSE Unit II</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface font-label-mono-epoch text-[11px] font-bold">IS 10014 Verified</span>
+<span class="px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-mono-epoch text-[11px] font-bold">SDG 8 &amp; 9 Aligned</span>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Stage Visualization & Learning Content (Columns 6-12) -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<!-- Stage Primary Dossier Card -->
+<div class="bg-surface-container-lowest p-space-xl rounded-2xl border border-surface-variant shadow-sm flex flex-col gap-space-lg">
+<!-- Stage Header Block -->
+<div class="flex flex-col gap-2">
+<div class="flex flex-wrap items-center gap-2">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-fixed font-label-mono-epoch text-label-mono-epoch font-semibold" id="stage-badge">
+      Typical Manufacturing Process • Verified Educational Model
+    </span>
+<span class="px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-md text-label-md font-bold" id="stage-counter-badge">
+      Stage 8 of 8
+    </span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight mt-1" id="stage-title">
+    Stage 8: Finished Garment (Retail Inspection &amp; Packaging)
+  </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed" id="stage-description">
+    The sewn cotton garment undergoes final quality inspection, pressing to remove creasing, care tag verification, barcode tagging, and folding for distribution.
+  </p>
+</div>
+<!-- Hero Image & Technical Blueprint Viewport -->
+<div class="relative w-full h-80 rounded-xl overflow-hidden shadow-sm bg-surface-container border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A museum-grade high precision photograph of an industrial garment finishing station. A crisp organic navy blue and cream cotton t-shirt is pressed flat on an ergonomic vacuum table. A quality control specialist with measuring calipers checks the collar alignment, with neat swing tags, barcode stickers, and neatly folded apparel stacked on a wooden inspection bench under diffused warm studio gallery lighting." id="stage-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSGtC-Ys6w9zVX6P872iP2H3W0Cl2ScjZV2AVIgaZaFibAIL3oKE6EiCMZc349tdfNyuTjRWTZedn7WUvcyVN-1b-JMz8FhFB_-4p8BuJFuMmIZvNwJGkDACML_BS2cZOnqTdj-iqaVHr87ACVOs5_-dwMUWUGbRsNU5UkThu0T7nw8-3sOHYi8Mij_ADmrFOcQj9HXiTvP7WD96As5K4GOKReUORHrNVoqefQChWceqFTEer-y7RE"/>
+<!-- Live Inspection Loupe Overlay Accent -->
+<div class="absolute bottom-4 left-4 backdrop-blur-md bg-surface/90 px-space-md py-2 rounded-lg shadow-md flex items-center gap-3 border border-surface-variant/80">
+<span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+<div class="flex flex-col">
+<span class="font-label-mono-epoch text-[11px] text-on-surface font-bold uppercase">AQL 2.5 Standard Inspection</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant">Zero dimensional skew allowance</span>
+</div>
+</div>
+<!-- Epoch Marker Ribbon -->
+<div class="absolute top-4 right-4 bg-surface-container-lowest/95 backdrop-blur px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1.5 font-label-mono-epoch text-label-mono-epoch text-on-surface border border-outline-variant/40">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+<span id="overlay-epoch">Stage 8 Analysis</span>
+</div>
+</div>
+<!-- Before → Transformation → After Process Stepper Card -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-sm border border-surface-variant flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">Physical State Metamorphosis</span>
+<span class="font-label-mono-epoch text-label-mono-epoch text-secondary font-bold">DELTA FLOW</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md items-stretch">
+<!-- Before state -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest border border-outline-variant/30 shadow-sm flex flex-col gap-1.5">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">indeterminate_check_box</span>
+<span class="font-label-mono-epoch text-[11px] uppercase tracking-wider font-semibold">Before</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-medium leading-snug" id="state-before">
+        Assembled Panels with Open Seams &amp; Loose Threads
+      </p>
+</div>
+<!-- Transformation action -->
+<div class="p-space-md rounded-lg bg-secondary-container/60 border border-secondary-fixed-dim/40 shadow-sm flex flex-col gap-1.5 relative">
+<div class="flex items-center gap-1.5 text-tertiary">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+<span class="font-label-mono-epoch text-[11px] uppercase tracking-wider font-semibold">Transformation</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-secondary-fixed font-medium leading-snug" id="state-transformation">
+        Steam Pressing, 100% Dimensional Inspection, Tag Attachment
+      </p>
+</div>
+<!-- After state -->
+<div class="p-space-md rounded-lg bg-primary-container text-on-primary-container shadow-sm flex flex-col gap-1.5">
+<div class="flex items-center gap-1.5 text-primary-fixed">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="font-label-mono-epoch text-[11px] uppercase tracking-wider font-semibold">After</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-primary font-medium leading-snug" id="state-after">
+        Retail-Ready Folded Cotton Garment
+      </p>
+</div>
+</div>
+</div>
+<!-- Inputs & Outputs Technical Balance Matrix -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Inputs Box -->
+<div class="p-space-lg rounded-xl bg-surface-container border border-surface-variant flex flex-col gap-2">
+<div class="flex items-center gap-2 text-tertiary">
+<span class="material-symbols-outlined text-[18px]">input</span>
+<span class="font-label-lg text-label-lg font-bold">Material &amp; Tool Inputs</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface" id="stage-inputs">
+      Stitched Garment, Care &amp; Fibre Labels, Swing Tags, Recycled Polybag / Paper Wrap.
+    </p>
+</div>
+<!-- Outputs Box -->
+<div class="p-space-lg rounded-xl bg-surface-container border border-surface-variant flex flex-col gap-2">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[18px]">output</span>
+<span class="font-label-lg text-label-lg font-bold">Final Stage Outputs</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface" id="stage-outputs">
+      Market-ready Apparel, Textile Trim Waste (to recycling stream).
+    </p>
+</div>
+</div>
+<!-- Interactive Action Deck & Source Citation -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<div class="flex flex-wrap items-center gap-space-md">
+<button class="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary-container hover:bg-primary text-on-primary-container font-label-lg text-label-lg shadow-md transition-all active:scale-95" type="button">
+<span class="material-symbols-outlined text-[20px]">play_circle</span>
+<span>Watch Process Clip (2:45 min)</span>
+</button>
+<a class="flex items-center gap-2 px-6 py-3 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-label-lg text-label-lg shadow-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">qr_code_scanner</span>
+<span>Inspect Attached Label →</span>
+</a>
+</div>
+<p class="font-body-sm text-[13px] text-on-surface-variant mt-1 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">info</span>
+<span>Source: Open Educational Textile Archive (Creative Commons). Illustrative process footage for educational study.</span>
+</p>
+</div>
+<!-- Stage Technical Glossary Chips -->
+<div class="flex flex-col gap-2 pt-space-sm">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">Domain Glossary Lexicon</span>
+<div class="flex flex-wrap gap-2" id="glossary-container">
+<span class="px-3 py-1 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface font-label-md text-label-md shadow-sm">
+      Dimensional Stability
+    </span>
+<span class="px-3 py-1 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface font-label-md text-label-md shadow-sm">
+      Tolerance Spec (± 0.5 cm)
+    </span>
+<span class="px-3 py-1 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface font-label-md text-label-md shadow-sm">
+      Seam Integrity
+    </span>
+<span class="px-3 py-1 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface font-label-md text-label-md shadow-sm">
+      Barcoding / GS1
+    </span>
+</div>
+</div>
+</div>
+<!-- Curricular Complementary Panels (SDG 8 & SDG 9 Dual Columns) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+<!-- SDG 8: Decent Work & Human Craftsmanship -->
+<div class="bg-surface-container-lowest p-space-xl rounded-2xl border border-surface-variant shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[22px]">engineering</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">People Behind Process</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-mono-epoch text-[11px] font-bold">
+        SDG 8
+      </span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-wider font-semibold">Primary Role</span>
+<p class="font-headline-sm text-[18px] text-on-surface font-semibold" id="worker-role">
+        Quality Control Inspector &amp; Finisher
+      </p>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-wider font-semibold">Core Daily Tasks</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" id="worker-tasks">
+        Measuring garment dimensions against grading charts, inspecting seam tensions, checking care label compliance and needle detection logs.
+      </p>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-outline-variant/30 flex flex-col gap-1">
+<span class="font-label-mono-epoch text-[11px] text-tertiary uppercase font-bold">Human Competencies</span>
+<p class="font-body-sm text-body-sm text-on-surface font-medium" id="worker-skills">
+        Precision measurement, fabric defect identification, ergonomic tool handling.
+      </p>
+</div>
+</div>
+<!-- SDG 9: Industry, Innovation & Infrastructure -->
+<div class="bg-surface-container-lowest p-space-xl rounded-2xl border border-surface-variant shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-tertiary">
+<span class="material-symbols-outlined text-[22px]">precision_manufacturing</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Industry &amp; Technology</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-label-mono-epoch text-[11px] font-bold">
+        SDG 9
+      </span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-wider font-semibold">Key Machinery</span>
+<p class="font-headline-sm text-[18px] text-on-surface font-semibold" id="tech-machinery">
+        Industrial High-Pressure Vacuum Steam Table &amp; RFID Tag Applicator
+      </p>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-wider font-semibold">Industrial Process</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" id="tech-process">
+        Thermally sets molecular fiber alignments to minimize consumer shrinkage and eliminates residual shipping moisture.
+      </p>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-outline-variant/30 flex flex-col gap-1">
+<span class="font-label-mono-epoch text-[11px] text-tertiary uppercase font-bold">Productivity &amp; Resource Metric</span>
+<p class="font-body-sm text-body-sm text-on-surface font-medium" id="tech-metric">
+        Automated laser inspection systems reduce post-retail returns by 18%.
+      </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Script: Temporal Step Navigation & Interactive Dial Engine -->
+<script>
+  // Comprehensive Stage Database across 8 Manufacturing Epochs
+  const garmentStages = {
+    1: {
+      number: 1,
+      title: "Stage 1: Cotton Cultivation & Harvesting",
+      badge: "Agricultural Origin • Raw Biomass",
+      description: "Cotton plants mature over 150-180 days. Bolls burst open into fluffy white seed cotton and are gathered by mechanical harvesters or hand pickers in warm subtropical climates.",
+      before: "Unopened Green Cotton Bolls on Field Stems",
+      transformation: "Defoliation, Solar Ripening, Machine Spindle Picking",
+      after: "Raw Seed Cotton (Seed + Fiber Mix)",
+      inputs: "Sunlight, Irrigation Water, Cotton Seeds (Gossypium hirsutum), Nutrients",
+      outputs: "Unginned Raw Seed Cotton, Plant Stalks (Biomass mulch)",
+      glossary: ["Gossypium", "Boll Weevil Control", "Micronaire Value", "Fibre Length"],
+      workerRole: "Agronomist & Harvesting Machine Operator",
+      workerTasks: "Monitoring crop moisture levels, running spindle harvesters, sampling staple length.",
+      workerSkills: "Soil chemistry assessment, heavy equipment maintenance, fiber grade grading.",
+      techMachinery: "Spindle Cotton Harvester & Field Module Builder",
+      techProcess: "Pneumatically extracts cotton seed lint from dry burrs and compresses it into 10-ton transport modules.",
+      techMetric: "Precision GPS drip-irrigation saves up to 34% field water per kilogram harvested.",
+      needleAngle: -45, // Points to Stage 1 at ~135° SVG coord
+      degreesText: "0° / 270°",
+      displacement: "-180 DAYS",
+      centerEra: "FARM<br/>ORIGIN",
+      imagePrompt: "A vast organic cotton field during harvest golden hour. Tall green-and-amber cotton shrubs with blooming white, soft fluffy cotton bolls. A clean modern agricultural tractor working in the distance, dramatic sunlight accenting the cotton fiber texture."
+    },
+    2: {
+      number: 2,
+      title: "Stage 2: Fibre Preparation (Ginning & Carding)",
+      badge: "Primary Mechanical Separation",
+      description: "Seed cotton is dried, cleaned of sticks and leaves, and passed through saw gin blades to separate the cotton lint from the seeds. Carding wires align the curly fibers into untwisted slivers.",
+      before: "Raw Clustered Seed Cotton with Seeds & Plant Dirt",
+      transformation: "Circular Saw Ginning, Delinting, Wire Carding Alignment",
+      after: "Uniform Carded Cotton Sliver (Web of Parallel Fibres)",
+      inputs: "Raw Seed Cotton, Compressed Air, Static Neutralizers",
+      outputs: "Ginned Cotton Bales, Cotton Seeds (for oil/feed), Gin Trash",
+      glossary: ["Saw Ginning", "Card Clothing", "Sliver Ribbon", "Lint Cleaner"],
+      workerRole: "Ginnery Technician & Carding Master",
+      workerTasks: "Tuning blade clearances, monitoring wire tooth sharpness, measuring nep count.",
+      workerSkills: "Pneumatic diagnostics, fiber damage detection, high-speed blade safety.",
+      techMachinery: "High-Capacity Saw Gin Stand & Revolving Flat Carding Engine",
+      techProcess: "Fine wire spikes brush entangled fibers millions of times per minute into parallel alignment.",
+      techMetric: "Optical sensor trash sorters discard 99.2% of plant detritus with zero fiber loss.",
+      needleAngle: -6,
+      degreesText: "39° / 270°",
+      displacement: "-120 DAYS",
+      centerEra: "GIN &<br/>CARD",
+      imagePrompt: "Inside a historic-modern textile ginning mill. Massive steel rollers and shiny carding drums brushing pure white cotton fibers into a gossamer-thin parallel sheet. Warm workshop lighting, crisp mechanical detail."
+    },
+    3: {
+      number: 3,
+      title: "Stage 3: Spinning (Yarn Production)",
+      badge: "Yarn Engineering & Twisting",
+      description: "Parallel cotton slivers are drawn out to achieve uniformity and given mechanical twist on ring-spinning or rotor frames to lock fibers together by friction into continuous, strong yarns.",
+      before: "Thick, Weak Cotton Slivers without Structural Twist",
+      transformation: "Drawing Roller Attenuation, Spindle Ring-Twisting, Winding",
+      after: "High-Tensile Cotton Yarn wound onto Cones",
+      inputs: "Combed/Carded Slivers, Ring Travelers, Paper Cones",
+      outputs: "Single or Ply Spun Yarns, Roving Waste (returned to blend)",
+      glossary: ["English Count (Ne)", "Twist per Inch (TPI)", "Ring Spindle", "Tensile Tenacity"],
+      workerRole: "Spinning Frame Operator & Doffer",
+      workerTasks: "Mending broken yarn ends (piecing), changing spindle travelers, inspecting cone density.",
+      workerSkills: "Rapid manual dexterity, yarn count identification, acoustic diagnostics.",
+      techMachinery: "Automated Ring Spinning Frame & Auto-Coner",
+      techProcess: "Differential roller speeds stretch fibers up to 40x before 18,000 RPM spindles impart spiral tension.",
+      techMetric: "Individual spindle speed control lowers energy consumption by 12% per kilogram of yarn.",
+      needleAngle: 32,
+      degreesText: "77° / 270°",
+      displacement: "-80 DAYS",
+      centerEra: "SPUN<br/>YARN",
+      imagePrompt: "A sleek textile spinning floor with thousands of bobbins spinning rapidly. Cream-colored cotton threads whirring on precision metal spindles. Clean geometric lines, atmospheric factory perspective."
+    },
+    4: {
+      number: 4,
+      title: "Stage 4: Fabric Formation (Knitting / Weaving)",
+      badge: "Textile Structural Synthesis",
+      description: "Yarns are interloped on high-speed circular knitting machines to produce flexible single-jersey fabric for everyday t-shirts, or interlaced on air-jet looms for structured poplins.",
+      before: "Individual Spools of Spun Cotton Yarn",
+      transformation: "Needle Latch Interlooping, Sinker Timing, Roll Take-Up",
+      after: "Continuous Rolls of Raw 'Greige' Knitted Tubular Fabric",
+      inputs: "Cotton Yarn Cones, Needle Lubricant, Lycra/Elastane (if stretch)",
+      outputs: "Raw Greige Knit Fabric Rolls, Yarn Creel Remnants",
+      glossary: ["Circular Knit", "Single Jersey", "Wale & Course", "Greige Good"],
+      workerRole: "Circular Knitting Technician",
+      workerTasks: "Threading multi-feeder yarn tracks, replacing worn latch needles, testing fabric weight (GSM).",
+      workerSkills: "Needle cam timing, loop structure analysis, electronic jacquard programming.",
+      techMachinery: "High-Speed 96-Feeder Single Jersey Circular Knitting Machine",
+      techProcess: "Latching needles cycle thousands of times each minute to create interconnecting jersey loops.",
+      techMetric: "Positive yarn feeder feeders reduce knitting tension variance to under 1.5%.",
+      needleAngle: 71,
+      degreesText: "116° / 270°",
+      displacement: "-45 DAYS",
+      centerEra: "KNIT<br/>FABRIC",
+      imagePrompt: "Close-up of an industrial circular knitting cylinder. Shiny chrome needles catching cotton threads forming a seamless knitted fabric loop. High precision machinery, soft industrial sheen."
+    },
+    5: {
+      number: 5,
+      title: "Stage 5: Wet Processing (Finishing & Dyeing)",
+      badge: "Aesthetic & Chemical Treatment",
+      description: "The raw greige fabric is scoured, bleached, and dyed in low-liquor jet dyeing vessels with reactive pigments that bond covalently with the cellulose, followed by stenter drying.",
+      before: "Natural Dull Off-White 'Greige' Knitted Tube with Natural Waxes",
+      transformation: "Enzymatic Scouring, Jet Reactive Dyeing, Stenter Heat Setting",
+      after: "Richly Colored, Softened, Dimensionally Stabilized Cotton Fabric",
+      inputs: "Greige Fabric, Non-toxic Reactive Dyes, Water, Enzymes, Softeners",
+      outputs: "Dyed Finished Rolls, Treated Wastewater (to Closed-Loop ETP)",
+      glossary: ["Reactive Dyeing", "Covalent Bond", "Stenter Frame", "Liquor Ratio"],
+      workerRole: "Dyehouse Chemist & Finishing Technologist",
+      workerTasks: "Spectrophotometer color matching, regulating bath pH and temperature curves, controlling stenter heat.",
+      workerSkills: "Colorimetry Delta-E reading, chemical handling safety, wastewater balancing.",
+      techMachinery: "Eco-Soft Jet Dyeing Machine & Multi-Chamber Stenter Frame",
+      techProcess: "Air-assisted liquid streams cycle fabric through dye vats under pressure to ensure uniform shade penetration.",
+      techMetric: "Low-liquor ratio tech cuts water usage from 1:10 down to 1:4.5 per kg of cotton dyed.",
+      needleAngle: 109,
+      degreesText: "154° / 270°",
+      displacement: "-25 DAYS",
+      centerEra: "DYE &<br/>FINISH",
+      imagePrompt: "Rich indigo-dyed cotton knit fabric emerging gracefully from a polished stainless-steel stenter finishing chamber. Steam drifting softly in an ultra-clean industrial dye lab."
+    },
+    6: {
+      number: 6,
+      title: "Stage 6: Pattern Cutting & Marker Making",
+      badge: "Geometry & Panel Optimization",
+      description: "Dyed fabric rolls are relaxed to relieve tension, spread into multi-layer plies on long tables, and sliced into precise garment pattern panels using CNC oscillating knife cutters.",
+      before: "Continuous Flat Dyed Fabric Rolls on Spindles",
+      transformation: "Stress Relaxation, Multi-ply Vacuum Spreading, CNC Blade Cutting",
+      after: "Bundled Cut Garment Components (Front, Back, Sleeves, Neck Rib)",
+      inputs: "Dyed Knit Fabric Rolls, Digital CAD Marker Nesting Files, Underlay Paper",
+      outputs: "Sorted Pattern Bundles, Offcut Fabric Scraps (to shoddy recycling)",
+      glossary: ["Marker Efficiency", "CAD Nesting", "Grainline Alignment", "Ply Height"],
+      workerRole: "Marker CAD Planner & Cutting Room Supervisor",
+      workerTasks: "Optimizing marker layouts to minimize offcut waste, checking ply alignment, managing bundles.",
+      workerSkills: "Geometric optimization software, fabric grain assessment, blade calibration.",
+      techMachinery: "Automated Multi-Ply Conveyorized CNC Knife Cutter",
+      techProcess: "Vacuum suction locks 50 layers of fabric into an immovable block while a computer-guided blade cuts curves.",
+      techMetric: "Digital CAD algorithm nesting pushes fabric utilization efficiency up to 88.5%.",
+      needleAngle: 148,
+      degreesText: "193° / 270°",
+      displacement: "-10 DAYS",
+      centerEra: "CNC<br/>CUTTING",
+      imagePrompt: "High-tech cutting room floor. A computer-controlled precision reciprocating blade slicing through stacked sheets of midnight-blue cotton jersey along glowing computerized path lines."
+    },
+    7: {
+      number: 7,
+      title: "Stage 7: Stitching & Garment Assembly",
+      badge: "Structural Joining & Construction",
+      description: "Cut pieces move through specialized assembly lines where skilled machinists use differential-feed overlock and coverstitch machines to join shoulders, attach sleeves, and set rib collars.",
+      before: "Separated Two-Dimensional Cut Fabric Panels",
+      transformation: "Overlock Seaming, Rib Collar Insertion, Twin-Needle Hemming",
+      after: "Fully Constructed Three-Dimensional Cotton Garment",
+      inputs: "Cut Fabric Bundles, Core-Spun Polyester/Cotton Sewing Thread, Neck Ribbing",
+      outputs: "Assembled Raw Garments, Thread Clippings, Needle Rubbish",
+      glossary: ["Overlock 4-Thread", "Coverstitch (ISO 406)", "Stitches Per Inch (SPI)", "Differential Feed"],
+      workerRole: "Industrial Sewing Machinist & Line Leader",
+      workerTasks: "Feeding seam edges evenly without stretching knit loops, attaching rib neckbands at exact tension ratios.",
+      workerSkills: "Fine motor synchronization, high-speed foot pedal control, seam puckering prevention.",
+      techMachinery: "Direct-Drive 4-Thread Overlock Machine & Flatbed Coverstitch Unit",
+      techProcess: "Interlocking upper and lower loopers enclose cut fabric edges to provide dynamic stretch for body movement.",
+      techMetric: "Modular lean manufacturing cells achieve sub-12 minute assembly cycle per standard t-shirt.",
+      needleAngle: 186,
+      degreesText: "231° / 270°",
+      displacement: "-3 DAYS",
+      centerEra: "SEWING<br/>LINE",
+      imagePrompt: "A bright, well-organized ergonomic garment sewing workstation. A skilled maker guiding navy cotton jersey through an overlock needle. Clean threads, thread spools aloft, natural daylight."
+    },
+    8: {
+      number: 8,
+      title: "Stage 8: Finished Garment (Retail Inspection & Packaging)",
+      badge: "Typical Manufacturing Process • Verified Educational Model",
+      description: "The sewn cotton garment undergoes final quality inspection, pressing to remove creasing, care tag verification, barcode tagging, and folding for distribution.",
+      before: "Assembled Panels with Open Seams & Loose Threads",
+      transformation: "Steam Pressing, 100% Dimensional Inspection, Tag Attachment",
+      after: "Retail-Ready Folded Cotton Garment",
+      inputs: "Stitched Garment, Care & Fibre Labels, Swing Tags, Recycled Polybag / Paper Wrap",
+      outputs: "Market-ready Apparel, Textile Trim Waste (to recycling stream)",
+      glossary: ["Dimensional Stability", "Tolerance Spec", "Seam Integrity", "Barcoding"],
+      workerRole: "Quality Control Inspector & Finisher",
+      workerTasks: "Measuring garment dimensions against grading charts, inspecting seam tensions, checking care label compliance.",
+      workerSkills: "Precision measurement, fabric defect identification, ergonomic tool handling.",
+      techMachinery: "Industrial High-Pressure Vacuum Steam Table & RFID Tag Applicator",
+      techProcess: "Thermally sets fiber structure and eliminates residual shipping moisture.",
+      techMetric: "Automated laser inspection systems reduce post-retail returns by 18%.",
+      needleAngle: 225,
+      degreesText: "270° / 270°",
+      displacement: "0 HRS • PRESENT",
+      centerEra: "RETAIL<br/>READY",
+      imagePrompt: "A museum-grade high precision photograph of an industrial garment finishing station. A crisp organic navy blue and cream cotton t-shirt is pressed flat on an ergonomic vacuum table. A quality control specialist with measuring calipers checks the collar alignment, with neat swing tags, barcode stickers, and neatly folded apparel stacked on a wooden inspection bench under diffused warm studio gallery lighting."
+    }
+  };
+
+  let activeStage = 8;
+  let autoplayInterval = null;
+
+  function renderStage(stageNum) {
+    const stage = garmentStages[stageNum];
+    if (!stage) return;
+    activeStage = stageNum;
+
+    // Update Texts
+    document.getElementById("stage-title").innerText = stage.title;
+    document.getElementById("stage-badge").innerText = stage.badge;
+    document.getElementById("stage-counter-badge").innerText = `Stage ${stageNum} of 8`;
+    document.getElementById("stage-description").innerText = stage.description;
+    document.getElementById("state-before").innerText = stage.before;
+    document.getElementById("state-transformation").innerText = stage.transformation;
+    document.getElementById("state-after").innerText = stage.after;
+    document.getElementById("stage-inputs").innerText = stage.inputs;
+    document.getElementById("stage-outputs").innerText = stage.outputs;
+    document.getElementById("worker-role").innerText = stage.workerRole;
+    document.getElementById("worker-tasks").innerText = stage.workerTasks;
+    document.getElementById("worker-skills").innerText = stage.workerSkills;
+    document.getElementById("tech-machinery").innerText = stage.techMachinery;
+    document.getElementById("tech-process").innerText = stage.techProcess;
+    document.getElementById("tech-metric").innerText = stage.techMetric;
+    document.getElementById("center-era-tag").innerHTML = stage.centerEra;
+    document.getElementById("hub-displacement").innerText = stage.displacement;
+    document.getElementById("slider-readout").innerText = `Node ${stageNum} / 8`;
+    document.getElementById("overlay-epoch").innerText = `Stage ${stageNum} Analysis`;
+    document.getElementById("dial-degree-indicator").innerText = stage.degreesText;
+    
+    const indicatorText = stageNum === 8 
+      ? "STAGE 8 OF 8 • FINISHED ARTIFACT" 
+      : `STAGE ${stageNum} OF 8 • REWOUND TEMPORAL STATE`;
+    document.getElementById("dial-stage-indicator").firstElementChild.lastChild.textContent = " " + indicatorText;
+
+    // Update Image Prompt
+    const stageImg = document.getElementById("stage-image");
+    stageImg.setAttribute("data-alt", stage.imagePrompt);
+
+    // Render Glossary Tags
+    const glossaryBox = document.getElementById("glossary-container");
+    glossaryBox.innerHTML = "";
+    stage.glossary.forEach(term => {
+      const span = document.createElement("span");
+      span.className = "px-3 py-1 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface font-label-md text-label-md shadow-sm";
+      span.innerText = term;
+      glossaryBox.appendChild(span);
+    });
+
+    // Update Needle Rotation
+    const needle = document.getElementById("chronometer-needle");
+    needle.style.transform = `rotate(${stage.needleAngle}deg)`;
+
+    // Update Circular Arc Gauge Fill (Circumference 829.38, 270 deg = 622.03)
+    const gauge = document.getElementById("gauge-fill");
+    const progressFraction = (stageNum - 1) / 7;
+    const arcDashLength = 622.03 * progressFraction;
+    gauge.style.strokeDasharray = `${arcDashLength} 829.38`;
+
+    // Update Node Highlight Classes with Tactile Enamel/Jewel styles
+    document.querySelectorAll(".stage-node").forEach(node => {
+      const id = parseInt(node.getAttribute("data-node"), 10);
+      const isSelected = (id === stageNum);
+      const isPassed = (id < stageNum);
+
+      // Clean existing classes except base
+      node.className = "stage-node stage-node-btn group absolute z-30 flex items-center justify-center font-label-mono-epoch transition-all active:scale-95";
+
+      if (isSelected) {
+        node.className += " active-node w-10 h-10 -ml-5 -mt-5 rounded-full bg-primary text-on-primary ring-4 ring-primary-fixed shadow-[0_4px_12px_rgba(184,0,53,0.35)] text-sm font-bold scale-110";
+      } else if (isPassed) {
+        node.className += " w-8 h-8 -ml-4 -mt-4 rounded-full bg-surface-container-highest hover:bg-surface-variant border border-outline/40 text-on-surface text-xs shadow-sm";
+      } else {
+        node.className += " w-8 h-8 -ml-4 -mt-4 rounded-full bg-surface-container-high hover:bg-surface-variant border border-outline/20 text-outline text-xs shadow-sm";
+      }
+    });
+
+    // Update Slider value
+    document.getElementById("stage-range").value = stageNum;
+
+    // Update Prev / Next Buttons state
+    const prevBtn = document.getElementById("btn-rewind-step");
+    const nextBtn = document.getElementById("btn-advance-step");
+    
+    if (stageNum <= 1) {
+      prevBtn.disabled = true;
+      prevBtn.className = "flex-1 flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-surface-container-low border border-outline-variant/20 text-outline cursor-not-allowed font-label-lg text-[13px] transition-transform";
+    } else {
+      prevBtn.disabled = false;
+      prevBtn.className = "flex-1 flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-surface-container hover:bg-surface-variant border border-outline-variant/40 text-on-surface font-label-lg text-[13px] transition-transform active:scale-95 shadow-sm";
+    }
+
+    if (stageNum >= 8) {
+      nextBtn.disabled = true;
+      nextBtn.className = "flex-1 flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-surface-container-low border border-outline-variant/20 text-outline cursor-not-allowed font-label-lg text-[13px] transition-transform";
+    } else {
+      nextBtn.disabled = false;
+      nextBtn.className = "flex-1 flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-surface-container hover:bg-surface-variant border border-outline-variant/40 text-on-surface font-label-lg text-[13px] transition-transform active:scale-95 shadow-sm";
+    }
+  }
+
+  function selectStage(num) {
+    if (autoplayInterval) clearInterval(autoplayInterval);
+    renderStage(parseInt(num, 10));
+  }
+
+  function rewindOneStep() {
+    if (autoplayInterval) clearInterval(autoplayInterval);
+    if (activeStage > 1) {
+      renderStage(activeStage - 1);
+    }
+  }
+
+  function advanceOneStep() {
+    if (autoplayInterval) clearInterval(autoplayInterval);
+    if (activeStage < 8) {
+      renderStage(activeStage + 1);
+    }
+  }
+
+  function handleSliderChange(val) {
+    if (autoplayInterval) clearInterval(autoplayInterval);
+    renderStage(parseInt(val, 10));
+  }
+
+  function autoRewindSequence() {
+    if (autoplayInterval) {
+      clearInterval(autoplayInterval);
+      autoplayInterval = null;
+      return;
+    }
+    // If at beginning, start from 8, else rewind sequentially to 1
+    if (activeStage === 1) renderStage(8);
+    autoplayInterval = setInterval(() => {
+      if (activeStage > 1) {
+        renderStage(activeStage - 1);
+      } else {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+      }
+    }, 1200);
+  }
+
+  // Initialize on stage 8 (Finished Garment)
+  document.addEventListener("DOMContentLoaded", function() {
+    renderStage(8);
+  });
+</script>
+</div></main><footer class="w-full bg-surface-container-low text-on-surface-variant mt-auto border-t border-surface-container-high shadow-[0_-1px_6px_rgba(0,0,0,0.02)]"><div class="w-full px-gutter lg:px-margin py-space-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg"><div class="flex flex-col gap-space-xs max-w-2xl"><div class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Time-Kerchief — BVP Promptaethon 2025 • Educational Manufacturing History Explorer</div><p class="font-body-sm text-body-sm text-on-surface-variant">Curated educational reference for Classes 8–12. Non-commercial, illustrative manufacturing workflows.</p></div><div class="flex flex-wrap items-center gap-x-space-lg gap-y-space-sm"><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors" data-path="sdg-8-decent-work" href="#">SDG 8: Decent Work</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors" data-path="sdg-9-industry-and-innovation" href="#">SDG 9: Industry &amp; Innovation</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors" data-path="curricular-standards" href="#">Curricular Standards</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors" data-path="methodology" href="#">Methodology</a></div></div></footer></body></html>

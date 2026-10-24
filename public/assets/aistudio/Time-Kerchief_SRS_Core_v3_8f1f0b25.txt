@@ -1,0 +1,87 @@
+TIME-KERCHIEF | BVP PROMPTAETHON | CORE MVP v3.0
+Team Doraemon
+Ayush Bhatt - Team Leader
+Kartik Aggarwal - Team Member
+Tanushree Dhawan - Team Member
+Aryan Das - Team Member
+Date: 21 October 2026
+Status: Proposed build specification; implementation and pilot results are not yet verified.
+Scope authority: This core-only package supersedes the earlier hackCBS scope and the subsequent BVP simulation/decision-challenge proposal for this event.
+
+SOFTWARE REQUIREMENTS SPECIFICATION
+
+1. SCOPE AND CONVENTIONS
+Shall = core release requirement. Should = stretch feature. Test IDs T01-T22 are the release checks. All test data must use curated records. Functional correctness does not establish educational efficacy.
+Environment: responsive browser SPA, 360px minimum viewport. Verify on an available Android Chrome device and desktop Chrome/Firefox; test iOS Safari if available and report when untested. No account or backend required.
+
+2. FUNCTIONAL REQUIREMENTS
+FR01 [F01/T01] The catalogue shall display exactly two primary journey cards with name, category and image. Supporting comparison/uncertainty records shall not accidentally create extra primary cards.
+FR02 [F01/T02] Unknown product IDs shall show a not-in-catalogue message and a route home, with no silent replacement.
+FR03 [F02/T03] First visit to a journey shall open at its finished-product stage. A returning visit may restore a valid local position; restarting resets to the finished stage.
+FR04 [F02/T04] Counter-clockwise drag shall select earlier main-path stages. Tap, arrow keys and labelled buttons shall reach all stages; Home selects the raw-material end and End selects the finished end. Navigation shall clamp at endpoints, not wrap.
+FR05 [F02/T04] The dial shall expose slider semantics, current stage title, minimum, maximum and current value. Pointer capture shall release on up/cancel. Reduced-motion mode shall disable nonessential transitions.
+FR06 [F03/T05] Stage changes shall update the title, stage counter, summary, inputs, outputs, transformation and image consistently. Each stage shall be labelled as a typical educational process.
+FR07 [F04/T06] Every stage shall display a reviewed image with meaningful alt text and a caption. A missing/broken image shall produce a text fallback without blocking navigation.
+FR08 [F04/T07] A stage video shall load only after user activation. Changing stage or leaving the route shall unmount/stop the active player. A video not available at a stage shall not produce an empty player.
+FR09 [F04/T08] At least one reviewed video resource per primary journey shall be available as a supported embed or external link. External links shall be labelled. Failed embeds shall offer a source link and text summary. Offline status shall clearly indicate videos may require internet.
+FR10 [F05/T09] Every stage shall show at least one generic worker role, task, relevant skill and technology explanation. Each journey shall include at least one reviewed note about worker training/safe-work considerations and one about process/resource efficiency. Notes shall not claim anything about a named factory.
+FR11 [F06/T10] Food details shall preserve printed ingredient order, nutrition values and units, basis, and declared allergens. Missing nutrients shall show 'Not declared', never zero. Each factual field shall resolve to evidence. Additive explanations shall resolve to cited definitions.
+FR12 [F07/T11] Fabric details shall display supported composition, construction and care information. Undeclared/unverified fields shall be labelled accordingly. Care symbols shown as product facts shall match the photographed tag.
+FR13 [F08/T12] Label facts and generic process material shall be visually distinguished. Evidence details shall show source title/reference, source image or link where applicable, and review/verification date. Glossary controls shall work by keyboard.
+FR14 [F09/T13] Each journey shall provide a four-question pre form and a different four-question post form covering transformation, label literacy, workers/skills and industry/technology. Forms shall have matching topic coverage and different question IDs. Optional practice may reuse reviewed questions.
+FR15 [F09/T13] Pre mode shall not reveal answers during baseline measurement. Post mode shall reveal explanations after submission. Practice may provide immediate feedback. Learners may skip the pre-check and explore; results shall then show post-only rather than a fabricated gain.
+FR16 [F09/T14] Each quiz run shall have a unique run ID. Scoring shall count the final answer to each run question once. Results shall show score, denominator and topic breakdown. A pre/post comparison shall use paired completed runs from the same learning cycle, product and content version.
+FR17 [F09/T15] Current stage, learning-cycle IDs, runs and answers shall persist locally when storage is available. Invalid or old incompatible state shall be safely migrated/reset. Denied/full storage shall fall back to memory with a persistence notice.
+FR18 [F10/T16] Core routes, content, images, glossary and quiz shall work after an offline-ready indication. An offline reload shall support both primary journeys. Remote video is excluded from this promise.
+FR19 [F10/T17] A reset control shall clear local progress and quiz records after confirmation. The app shall collect no names, email addresses or class codes.
+FR20 [F11/T22, stretch] Comparison shall align verified food fields and units without healthy/unhealthy ranking. Optional per-serve values shall use verified serving mass; otherwise hide the toggle.
+
+3. NON-FUNCTIONAL REQUIREMENTS
+NFR01 [T18] Usable catalogue target: within 3 seconds on the recorded mid-range test phone under documented 4G-like throttling and cold cache. Record device, browser and throttle; do not claim universal timing.
+NFR02 [T18] Initial app JS target <=300KB gzip, excluding video providers. Load no third-party player before activation. Stage text and cached images should update within 300ms of selection. Investigate visible drag jank on the real phone.
+NFR03 [T19] Core controls shall have visible focus, accessible labels, AA text contrast and touch targets at least 44x44 CSS px. No horizontal page overflow at 360px. Text alternatives shall cover media meaning; captioned videos are preferred and a reviewed summary is required.
+NFR04 [T20] Production build shall fail on broken required references, invalid main paths, missing evidence metadata, missing core images, invalid quiz answers or unmatched topic coverage. Human content review remains mandatory.
+NFR05 [T21] App facts shall come from reviewed content. No health recommendations, allergy guarantees, brand-factory provenance claims or quantified impact claims without supporting evidence.
+NFR06 [T21] User text/content shall render without unsafe HTML injection. External resources shall use HTTPS; new-tab links shall use noopener/noreferrer. No secret credentials in the client bundle.
+NFR07 [T20] Adding another journey shall require data and assets, not product-specific navigation logic. Video/network failures shall not block image/text learning.
+
+4. ACCEPTANCE TESTS
+T01 Open both cards; confirm supporting records are not primary cards.
+T02 Navigate to an invalid ID; confirm clear error and home link.
+T03 Fresh session opens last stage; reload restores valid position; reset restarts.
+T04 Drag/tap/keyboard/buttons reach every stage; endpoints do not wrap; test pointer cancellation, slider announcements and reduced motion.
+T05 For every stage verify all fields and matching image, including transformation.
+T06 Break one image URL in a test fixture; confirm fallback and usable controls.
+T07 Play a video; change stage and route; verify no old audio/player remains and no autoplay.
+T08 Test embed allowed, blocked, external-only and offline cases; verify a reviewed video resource per journey.
+T09 Audit every role/task/skill/technology field and required journey-level notes.
+T10 Compare every food field and declared allergen with reviewed label evidence; test missing value.
+T11 Compare composition and care symbols with tag; test unknown construction and unlabelled sample.
+T12 Open sources and glossary using keyboard; verify label/process distinction.
+T13 Complete both quiz forms; verify topic parity, different IDs and mode-specific feedback; skip pre and check post-only result.
+T14 Submit/revisit an answer; verify no duplicate counting. Repeat run; ensure previous runs do not inflate score or cross-pair.
+T15 Reload; simulate corrupt JSON, incompatible version, storage denial and quota error.
+T16 Wait for offline-ready; disable network; reload and complete both journeys and quiz. Confirm honest remote-video fallback.
+T17 Reset records; verify storage cleared and fresh learning cycle. Inspect outgoing requests for absence of user-entered identifiers.
+T18 Record bundle size and load/update timings under specified environment.
+T19 Real-phone 360px and keyboard pass; contrast/axe checks and manual media alternative review.
+T20 Introduce invalid main path, evidence, media, glossary and question references; build must fail. Review valid build.
+T21 Review visible content, HTML rendering, external link behaviour and absence of secrets.
+T22 If enabled, verify matching units/basis, missing values and serving calculation/rounding against evidence.
+
+5. DATA AND FAILURE CONTRACT
+Canonical schemas and storage boundaries are in TRD; flows are in DFD. Source records must support both label photographs and authoritative text references. Runtime storage is local and does not include media-provider history.
+If a product cannot satisfy required label evidence, replace the demo item with a verified item before release, not with an invented composition. Offline capability requires completed precaching, not merely visiting the homepage.
+
+6. TRACEABILITY
+F01 -> FR01-FR02 -> T01-T02
+F02 -> FR03-FR05 -> T03-T04
+F03 -> FR06 -> T05
+F04 -> FR07-FR09 -> T06-T08
+F05 -> FR10 -> T09
+F06 -> FR11 -> T10
+F07 -> FR12 -> T11
+F08 -> FR13 -> T12
+F09 -> FR14-FR17 -> T13-T15
+F10 -> FR18-FR19, NFR01-NFR07 -> T16-T21
+F11 -> FR20 -> T22 (only if included)

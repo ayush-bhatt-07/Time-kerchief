@@ -1,0 +1,68 @@
+TIME-KERCHIEF | BVP PROMPTAETHON | CORE MVP v3.0
+Team Doraemon
+Ayush Bhatt - Team Leader
+Kartik Aggarwal - Team Member
+Tanushree Dhawan - Team Member
+Aryan Das - Team Member
+Date: 21 October 2026
+Status: Proposed build specification; implementation and pilot results are not yet verified.
+Scope authority: This core-only package supersedes the earlier hackCBS scope and the subsequent BVP simulation/decision-challenge proposal for this event.
+
+PRODUCT REQUIREMENTS DOCUMENT
+
+1. PRODUCT SUMMARY
+Time-Kerchief turns a familiar product into a guided manufacturing lesson. A learner selects a curated product, rewinds through its typical production stages using a dial, and examines a stage-specific picture, optional video, and explanation. Compact label decoders, worker and skills context, and a short learning check connect the product to science, decent work and industrial innovation.
+The core loop is Choose -> Rewind -> Observe -> Decode -> Understand people and processes -> Check learning.
+This version excludes production decision challenges, fabric-layout simulations and scenario-based forward replay. Ordinary next-stage navigation remains available.
+
+2. PROBLEM AND USERS
+Problem hypothesis: Students can watch manufacturing content but may struggle to connect individual transformations to product labels, worker tasks and industrial technology. Videos, label facts and explanations are often presented separately. Validate this hypothesis through learner interviews and a small pilot.
+Primary users: students roughly in classes 8-12; teachers facilitating lessons. Secondary users: curious general users.
+User needs: control the pace; see what changes at each stage; understand unfamiliar terms; distinguish real label evidence from a generic process; check understanding without creating an account.
+A teacher dashboard, student accounts and formal curriculum certification are outside the MVP.
+
+3. VALUE AND POSITIONING
+The differentiator is the navigable relationship between a product, its stages, media, evidence and worker context. The app is a curated learning tool, not supplier traceability software or a product health-rating service.
+SDG 8 context: worker roles, skills, training and generic safe-work considerations.
+SDG 9 context: machinery, process innovation, infrastructure and qualitative resource efficiency.
+The demonstrable impact is learning. Do not claim jobs created, actual factory improvements or measured resource savings.
+
+4. FEATURE PRIORITIES AND ACCEPTANCE
+F01 MUST - Curated catalogue: two primary cards, one biscuit and one verified cotton garment. Both open without login or scanning. A second biscuit may exist only as supporting comparison data; an unlabelled fabric sample may support an uncertainty question.
+F02 MUST - Reusable reverse-time dial: starts at the finished product on first visit, moves along an explicit main path by drag, tap, keyboard and Previous/Next controls; no wrap from the first to last stage.
+F03 MUST - Stage information: title, stage counter, short explanation, inputs, outputs and a clear before/after transformation. Can use text plus a single annotated image; a second image is not mandatory.
+F04 MUST - Stage media: one reviewed picture/illustration per stage; at least one reviewed, stage-matched video resource per primary journey. Each stage may have its own separate video. User starts playback; no autoplay. Unavailable video retains image and explanation.
+F05 MUST - People and industry context: each stage identifies generic worker role(s), task(s), relevant skills and a brief technology explanation. Selected stages include source-backed training, safe-work and resource-use notes. Never imply brand compliance.
+F06 MUST - Food decoder: verified ingredient order, basic nutrition with units and basis, declared allergens, and a small relevant additive glossary. Values resolve to evidence. No health score or medical advice.
+F07 MUST - Fabric decoder: verified composition, construction where supported, and actual care symbols. Unknown information stays unknown. No inferred composition from photographs.
+F08 MUST - Evidence and glossary: visible distinctions between 'From this label' and 'Typical process'; source details and review dates; tap-to-explain definitions for selected technical words.
+F09 MUST - Learning checks: equivalent short pre/post forms and practice feedback; topic-level local results. Include one food-claim interpretation item and one fabric-label uncertainty item. These are comprehension questions, not production decision scenarios.
+F10 MUST - Accessible and resilient delivery: mobile layout, keyboard navigation, text alternatives and cached core after explicit readiness. Remote videos remain online-only unless separately licensed and bundled.
+F11 STRETCH - Verified two-biscuit comparison; per-serving toggle if serving data is verified; additional reviewed stage videos; downloadable results if time permits.
+
+5. CONTENT SCOPE
+Food main path in forward order: wheat cultivation, milling, mixing, shaping, baking, packaging, finished biscuit. Label as simplified; sugar and oil have other upstream routes not modelled in the MVP.
+Fabric main path: cotton cultivation, fibre preparation, spinning, fabric formation, finishing, cutting, stitching, finished garment. Choose weaving OR knitting to match the verified item; stage order is a typical teaching model, not brand-specific provenance.
+Fibre preparation can explain ginning and preparation briefly. Keep definitions age-appropriate and cite reviewed sources.
+Use a real labelled cotton item. An unlabelled sample cannot substitute for the required verified garment journey.
+
+6. MEDIA EXPERIENCE
+Selecting a stage updates its image, information, worker context and video control together. The video loads on demand. Leaving a stage stops/unmounts playback. Videos may be separate clips or supported timestamp links into a longer source. If precise end-time control is unavailable, show the recommended segment as guidance and do not promise automatic stopping.
+For each media asset record source, creator, rights/permission basis, caption/alt text and review date. Generic manufacturing footage is not evidence of the selected brand's factory.
+Offline text and images remain available. External media uses a clear online-required state and a text summary. Do not prefetch all videos or download third-party footage without permission.
+
+7. SUCCESS AND VALIDATION
+Pilot with 5-10 learners, treated as exploratory. Observe first-use dial success, ability to locate evidence, completion and confusing terms. Compare topic-level pre/post responses from different but comparable questions. Report actual counts and sample size, not promised percentages.
+Technical targets and acceptance tests are in SRS. Product success is a learner explaining a transformation, distinguishing label evidence from typical process information, and identifying a worker/technology consideration.
+
+8. EXCLUSIONS
+No production decision challenges, budget games, fabric-layout simulations, factory simulator, hypothetical outcome replay, chatbot, runtime AI-generated facts, scanning/OCR, arbitrary products, logins, cloud sync, teacher dashboard, brand portal, sustainability scoring, 3D environment or multilingual release.
+No requirement to host videos ourselves. No real-time factory data.
+
+9. DEPENDENCIES AND OPEN DECISIONS
+Confirm BVP duration, judging rubric and prepared-work rules. The implementation schedule assumes about 24 hours and four people; it is not an event fact.
+Before build freeze: choose verified garment and biscuit; complete label evidence; select permitted media and references; confirm food claim wording/footnote; assign technical roles.
+If event rules require runtime AI, revise this package explicitly rather than adding an unplanned chatbot. Prompt-assisted development is not equivalent to AI product functionality.
+
+10. DELIVERY GATE
+All MUST features and SRS tests pass, content reviewer signs off, both journeys complete on a real phone, offline core works after readiness, and sources are visible. Stretch features cannot block release.

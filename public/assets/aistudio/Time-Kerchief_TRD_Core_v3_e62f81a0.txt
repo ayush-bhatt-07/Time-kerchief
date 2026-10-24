@@ -1,0 +1,82 @@
+TIME-KERCHIEF | BVP PROMPTAETHON | CORE MVP v3.0
+Team Doraemon
+Ayush Bhatt - Team Leader
+Kartik Aggarwal - Team Member
+Tanushree Dhawan - Team Member
+Aryan Das - Team Member
+Date: 21 October 2026
+Status: Proposed build specification; implementation and pilot results are not yet verified.
+Scope authority: This core-only package supersedes the earlier hackCBS scope and the subsequent BVP simulation/decision-challenge proposal for this event.
+
+TECHNICAL REQUIREMENTS DOCUMENT
+
+1. ARCHITECTURE
+Browser-only core with three layers: reviewed content, pure TypeScript engine, React UI. No API/database is required. Use Vite + React + TypeScript, HashRouter for simple static hosting, Zod validation, a small persisted state store (Zustand or equivalent), CSS transitions, and a service worker/precache plugin. Pin compatible dependency versions in the lockfile at kickoff; these documents do not prescribe 'latest' installation commands.
+Use Vitest for pure functions and component tests where useful. Use a browser smoke suite or manual device checklist for media, offline and keyboard behaviour. No runtime LLM, Supabase or login in this scope.
+
+2. REPOSITORY
+src/app/ - Home, Journey, Decoder, Quiz, Results, NotFound
+src/components/ - Dial, StagePanel, StageMedia, WorkerPanel, EvidencePanel, GlossaryPopover
+src/engine/ - path.ts, dial.ts, scoring.ts, nutrition.ts
+src/content/ - catalogue.json, products/, stages/, media/, evidence/, glossary/, questions/
+src/lib/ - schema.ts, validation.ts
+src/store/ - progress.ts, storage.ts
+public/assets/ - reviewed, licensed images and evidence photos
+scripts/validate-content.ts
+tests/ - engine, schema and state fixtures
+Content and media rights notes live beside the source records. Do not keep private user information in fixtures.
+
+3. CONTENT CONTRACT
+All IDs are stable strings; references are validated before build. Dates are ISO YYYY-MM-DD. Text is plain text unless explicitly sanitised.
+Source {id, kind: label-photo|reference, title, url?, assetPath?, publisher?, verifiedAt, reviewer}
+EvidenceValue<T> {status: verified|not-declared|not-verified, value: T|null, sourceIds: string[]}
+Verified values require at least one resolving source; unknown values require null plus a readable reason where useful.
+Media {id, type: image|video, sourceId, creator, rightsBasis, reviewedAt, caption, altText?, assetPath?, url?, playback: bundled-image|embed|external, provider?, startSeconds?, endSeconds?, transcriptSummary?}
+Image requires assetPath and altText. Video requires HTTPS URL and summary. End time is advisory unless the selected provider API supports enforcement. Media source must resolve; rightsBasis is reviewed, not automatically inferred from a URL.
+Worker {role, task, skills: string[], sourceIds: string[]}
+Stage {id, title, summary, inputs: string[], outputs: string[], transformation, imageId, videoIds: string[], workers: Worker[], technologyNote, technologySourceIds: string[], workNote?, workSourceIds?: string[], efficiencyNote?, efficiencySourceIds?: string[], sourceIds: string[], glossaryIds: string[]}
+Product {id, category: food|fabric, visibility: primary|supporting, name, variant?, imageId, stageIds: string[], mainPath: string[], disclaimer, food?, fabric?}
+Food {ingredients: EvidenceValue<ordered ingredient records>, nutrients: [{field, amount: EvidenceValue<number>, unit, basis: per100g}], allergens: EvidenceValue<string[]>, servingMassG?: EvidenceValue<number>, claimItems: [{text, footnote?, sourceIds, interpretation}]}
+Fabric {fibres: EvidenceValue<[{name,percent}]>, construction: EvidenceValue<woven|knitted>, care: EvidenceValue<[{symbolId,meaning}]>, gsm?: EvidenceValue<number>}
+Glossary {id, term, definition, sourceIds}
+Question {id, productId, form: pre|post|practice, topic: transformation|label|workers|industry, prompt, options: [{id,text}], correctOptionId, explanation, sourceIds}
+Do not duplicate facts in a decoder array and a separate facts array without a single canonical reference. Both UI and quiz use the same reviewed evidence.
+
+4. JOURNEY AND DIAL LOGIC
+mainPath is an explicit ordered list from raw material to finished product. Every ID must occur once and resolve to the product's stage set. Future branch stages must not enter the dial merely because they exist.
+Use a bounded 270-degree arc with a visible gap, raw material at the start and finished product at the end. Increasing index moves clockwise; first open sets index = mainPath.length - 1.
+Map pointer angle into the arc coordinate. If pointer lies in the gap, clamp to the nearer endpoint; do not wrap. Keyboard arrows change index by one, Home/End select endpoints. Direct tap chooses the requested marker regardless of distance.
+Use pointer capture; update React state only when the nearest stage changes. Handle cancel/lost capture. Animate the hand within the bounded arc; reduced motion uses immediate updates. Buttons remain available if dragging is difficult.
+Stage selection is the single source of truth for title, image, text, worker panel and video list. Do not allow stale asynchronous media responses to change another stage.
+
+5. MEDIA LIFECYCLE
+A stage image uses a bundled compressed asset with explicit dimensions to prevent layout shifts. Precache all core and evidence images; do not depend on cross-origin images for offline guarantees.
+On play, instantiate the selected embed only when online or open the external URL. On stage/route change, destroy the iframe/player and reset activeVideoId. No hidden player persists. Never set autoplay by default.
+Use an allowlisted provider strategy with explicit fallback; an external link is acceptable if embedding is prohibited. Supported timestamp links may jump to a segment. If automatic stop is unavailable, show 'Suggested segment mm:ss-mm:ss' and let the user control playback.
+Lazy-load video providers. Do not send app quiz state to media URLs. Disclose that external hosts may receive normal network metadata and apply their own cookies/policies. Third-party privacy is not equivalent to 'no data leaves the browser.'
+
+6. QUIZ AND LOCAL STATE
+State {schemaVersion, contentVersion, sessionId, stageByProduct, cycles, runs, answers}
+Cycle {id, productId, contentVersion, preRunId?, postRunId?}
+Run {id, cycleId, productId, mode, contentVersion, questionIds, startedAt, completedAt?}
+Answer {runId, questionId, selectedOptionId, answeredAt}
+Unique answer key = runId + questionId; replacing an answer does not add another score. Derive correctness from the question bank; do not trust a persisted correct flag. Score only questions in that run.
+Pre/post compare completed runs in the same cycle/version. Starting a new learning cycle does not overwrite old scores unless reset requested. Practice is never a pre/post baseline.
+Store as tk-core-v3 in localStorage through a try/catch adapter. Validate hydrated state, migrate compatible shapes or reset incompatible data with a notice. On quota/denial, continue in memory and explain that progress may not survive reload. Reset removes state and creates a fresh random session ID.
+No server sync or teacher aggregation. Random IDs and browser records still deserve proportionate retention/reset controls; do not call the app universally anonymous across external hosts.
+
+7. VALIDATION AND CONTENT REVIEW
+Build gate checks: exactly two primary journeys; required stages resolve; unique main-path IDs; at least one stage video per primary journey; every stage image exists; media/evidence/glossary references resolve; source dates valid; verified fields have evidence; unknown fields use null; ingredient order preserved in source review; numerical values finite and nonnegative; fibre percentages consistent within documented rounding; quiz answer belongs to options; four pre and four post questions per journey with matching topic coverage and different IDs.
+Validate safe HTTPS external URLs and registry/provider mappings. Do not attempt to establish factual truth, rights ownership, video availability or pedagogical equivalence solely through schema checks. A second person reviews these manually.
+
+8. OFFLINE, PERFORMANCE AND ACCESSIBILITY
+Precache app shell, all core routes/chunks, bundled JSON and all required local assets. Show offline-ready only after precache activation/readiness succeeds. Remote videos remain excluded. Publish content/cache versions together. Offer an update notification; activate a new build between quiz runs, not halfway through a scored run.
+Initial JS budget <=300KB gzip is a target. Use CSS rather than a large animation library unless justified. Optimise stage pictures, but preserve label-photo legibility. Test image zoom on a phone. Load no video iframe on the initial page.
+Target <=3s usable catalogue in the recorded test environment and <=300ms stage text/cached image response. Verify focus, labels, contrast, reduced motion, error announcements and 360px layout. Use a simple accessible dialog for evidence with focus return on close.
+
+9. SECURITY AND DELIVERY
+Static hosting with HTTPS. Render content as text; avoid dangerouslySetInnerHTML. Configure CSP for chosen image/video hosts where hosting supports it. External links use noopener/noreferrer. No client secrets or AI API keys.
+CI: content validation -> typecheck -> meaningful engine/state tests -> production build. Deploy a tagged static build; verify hosted and local preview. Content changes trigger the same checks. Keep a backup recording and local build; neither replaces testing the live app.
+
+10. IMPORTANT EDGE CASES
+Missing stage: fail build. Unknown runtime product: NotFound. Broken image: text fallback. Embed blocked: external link/summary. Offline before installation: explain first load is required. Corrupt storage: reset safely. Content upgrade: prevent incompatible quiz pairing. Missing garment evidence: do not invent composition. Missing claim footnote: remove the claim item and use a verified alternative.

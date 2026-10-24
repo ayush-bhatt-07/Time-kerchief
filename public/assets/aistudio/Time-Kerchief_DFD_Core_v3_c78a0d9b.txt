@@ -1,0 +1,123 @@
+TIME-KERCHIEF | BVP PROMPTAETHON | CORE MVP v3.0
+Team Doraemon
+Ayush Bhatt - Team Leader
+Kartik Aggarwal - Team Member
+Tanushree Dhawan - Team Member
+Aryan Das - Team Member
+Date: 21 October 2026
+Status: Proposed build specification; implementation and pilot results are not yet verified.
+Scope authority: This core-only package supersedes the earlier hackCBS scope and the subsequent BVP simulation/decision-challenge proposal for this event.
+
+DATA FLOW DIAGRAM SPECIFICATION
+
+1. SYSTEM BOUNDARY
+The runtime system is the Time-Kerchief browser app. Authored content is read-only in the production build; learner progress is written locally. A separate build-time process validates and publishes content. No cloud quiz database, AI service, simulation engine or teacher analytics flow exists in this version.
+Notation: E = external entity; P = process; D = data store. The Mermaid blocks below are renderable diagram definitions within this TXT file; flow inventories provide the full plain-text specification.
+
+2. ENTITIES AND STORES
+E1 Learner: selects products/stages, opens media/evidence, answers questions, resets progress.
+E2 Content author/reviewer: supplies reviewed JSON, label photos, source metadata and permitted media at build time.
+E3 External media/reference host: serves requested videos/articles/source pages, subject to its own policies.
+E4 Static host: supplies the published app and local assets.
+D1 Content bundle: products, stages, sources, glossary, questions, media metadata.
+D2 Bundled assets: stage images, label photographs and permitted local illustrations.
+D3 Browser progress: versioned stage positions, cycles, runs and answers.
+D4 Service-worker cache: app shell, bundle, chunks and core assets; no external video cache.
+D5 Authoring repository: source content/assets and validation/review records, build-time only.
+
+3. CONTEXT DIAGRAM
+```mermaid
+flowchart TD
+  E1["Learner"] -->|"Selections and answers"| P0["Time-Kerchief browser app"]
+  P0 -->|"Lessons and results"| E1
+  E4["Static host"] -->|"App and content assets"| P0
+  P0 -->|"Requested media or source URL"| E3["External media host"]
+  E3 -->|"Media or source response"| P0
+```
+Context flows: C1 learner selections/answers -> app; C2 app learning views/results -> learner; C3 app resource requests -> static host; C4 static host assets -> app; C5 user-initiated media/source request -> external host; C6 media/source response -> embedded view or separate browser tab. The diagram compresses the static request/response into the delivery edge; C3 is specified here.
+Authors are outside the runtime boundary and enter through the build-time diagram below, not through an in-app editor.
+
+4. LEVEL 1 RUNTIME
+P1 Browse catalogue: E1 selection + D1 product summaries -> product ID or not-found response.
+P2 Navigate stage: product ID + E1 dial/button input + D1 main path + D3 saved position -> selected stage, D3 new position, stage fields to view.
+P3 Present stage/media: selected stage + D1 metadata + D2 image -> picture/text/worker view. A separate E1 play action -> E3 request; E3 response -> player or fallback. Stage change -> stop/unmount player.
+P4 Decode evidence: E1 field/source/glossary choice + D1 facts/references + D2 label image -> decoded field or evidence view. External source click -> E3; no quiz data attached.
+P5 Run learning check: E1 mode/answers + D1 question bank + D3 cycle/run context -> scored local results and D3 answer writes.
+P6 Manage local state: hydration/reset/update intent + D3 stored state -> validated state, memory fallback or reset; no external recipient.
+P7 Prepare offline core: E4 asset responses -> D4; successful cache readiness -> offline-ready status. Offline requests -> D4 -> P1-P5 required assets.
+
+```mermaid
+flowchart TD
+  E1["Learner"] -->|"Product and stage"| P2["P1 and P2 Browse and navigate"]
+  D1["D1 Reviewed content"] --> P2
+  P2 -->|"Selected stage"| P3["P3 Present stage and media"]
+  P3 -->|"Image request"| D2["D2 Bundled assets"]
+  P3 -->|"Lesson"| E1
+  E1 -->|"Evidence selection"| P4["P4 Decode evidence"]
+  D1 --> P4
+  P4 -->|"Facts and sources"| E1
+  E1 -->|"Quiz answers"| P5["P5 Learning check"]
+  D1 --> P5
+  P5 -->|"Runs and answers"| D3["D3 Local progress"]
+  P5 -->|"Results"| E1
+```
+Diagram is a compact view of the principal learning flow. P6/P7, external media lifecycle and response edges are defined explicitly in the inventory, avoiding an unreadable all-in-one diagram.
+
+5. LEVEL 2 NAVIGATION AND MEDIA
+P2.1 Resolve product and explicit mainPath from D1.
+P2.2 Read valid saved index from D3; otherwise select finished stage.
+P2.3 Translate pointer/tap/keyboard input into bounded index; no endpoint wrap.
+P2.4 Commit selected index; update D3 position through P6.
+P3.1 Resolve stage image, information, role/skill fields and video list.
+P3.2 Stop/unmount previous active player, update image/text together.
+P3.3 On explicit play, check selected video/provider and initiate E3 request.
+P3.4 Render player or external link; show summary on failure/offline.
+No stage choice generates new facts or manufacturing media.
+
+6. LEVEL 2 LEARNING CHECK
+P5.1 Select product, learning cycle, mode and content version.
+P5.2 Create run with immutable question ID list from D1.
+P5.3 Present question; accept a valid option ID.
+P5.4 Upsert answer keyed by run ID and question ID into D3 through P6.
+P5.5 Score against D1 canonical answers after completion; mode controls feedback timing.
+P5.6 Aggregate topics and pair completed pre/post runs only within same cycle/product/version.
+P5.7 Show results to E1; no results leave the browser.
+Failure flow: unavailable storage -> in-memory store + visible persistence notice. Invalid state -> safe reset. No pre-run -> post-only result.
+
+7. BUILD-TIME CONTENT FLOW
+```mermaid
+flowchart TD
+  E2["Author and reviewer"] -->|"Content and assets"| D5["D5 Repository"]
+  D5 --> P8["P8 Validate schemas and references"]
+  P8 -->|"Errors"| E2
+  P8 -->|"Valid package"| P9["P9 Build and publish"]
+  E2 -->|"Human review approval"| P9
+  P9 -->|"Versioned app and assets"| E4["Static host"]
+```
+Human review checks factual accuracy, source relevance, rights basis and learning questions. Automated checks validate structure and references. A successful schema check alone does not prove content true.
+
+8. DATA DICTIONARY
+Product: identity/category/visibility/mainPath; D1.
+Stage: transformation/inputs/outputs/workers/technology/source references; D1.
+Media: asset URL or path/provider/segment guidance/caption/rights/source; D1, bytes in D2 or E3.
+Evidence: source/verification date/status/value; D1, label photo in D2.
+Glossary and questions: reviewed text/source IDs/answer key; D1.
+Cycle/run/answer: random IDs/product/version/mode/question choices; D3.
+Cached files: content version/app chunks/local assets; D4.
+Exact field shapes and invariants are in TRD.
+
+9. TRUST BOUNDARIES
+Author -> build: validation plus human review; source content cannot execute as HTML.
+Static host -> browser: HTTPS and versioned deployment; cache readiness is explicit.
+Browser -> external hosts: user-initiated requests can expose normal IP/referrer/cookie metadata; no app quiz records or identifiers are appended. Prefer noreferrer for new tabs and restrict embed hosts.
+Browser local state: reset available; handle corruption/denial; no server collection.
+
+10. TRACEABILITY
+P1 -> F01 / FR01-FR02 / T01-T02
+P2 -> F02 / FR03-FR05 / T03-T04
+P3 -> F03-F05 / FR06-FR10 / T05-T09
+P4 -> F06-F08 / FR11-FR13 / T10-T12
+P5 -> F09 / FR14-FR17 / T13-T15
+P6-P7 -> F10 / FR18-FR19 / T16-T17
+P8-P9 -> NFR04-NFR07 / T20-T21
+Performance/accessibility gates -> T18-T19; optional comparison -> T22.

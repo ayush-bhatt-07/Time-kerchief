@@ -1,0 +1,82 @@
+TIME-KERCHIEF | BVP PROMPTAETHON | CORE MVP v3.0
+Team Doraemon
+Ayush Bhatt - Team Leader
+Kartik Aggarwal - Team Member
+Tanushree Dhawan - Team Member
+Aryan Das - Team Member
+Date: 21 October 2026
+Status: Proposed build specification; implementation and pilot results are not yet verified.
+Scope authority: This core-only package supersedes the earlier hackCBS scope and the subsequent BVP simulation/decision-challenge proposal for this event.
+
+IMPLEMENTATION PLAN
+
+1. DELIVERY GOAL
+Ship two working curated journeys using the same dial and stage/media components. Each journey connects images, selected videos, verified label details, workers/skills, technology and a short learning check. No simulation, production decision challenge or hypothetical forward replay is part of this plan.
+Assumption: four people and about 24 build hours. Confirm actual BVP rules/duration before adopting this schedule. No implementation role assignment below is a claim about a member's skills.
+
+2. TEAM AND OWNERSHIP
+Ayush Bhatt is team leader and coordinates scope, integration and demo acceptance.
+At kickoff assign R1-R4 among Ayush, Kartik, Tanushree and Aryan:
+R1 Navigation/state: engine/, store/, Dial; owns T03-T04, T14-T15.
+R2 UI/decoders: app/, StagePanel, EvidencePanel, decoders, glossary; owns T01-T02, T05, T10-T12, T19.
+R3 Content/assessment: content/, schemas, validator, Quiz/Results; owns T09, T13, T20 and factual review.
+R4 Media/delivery: StageMedia, assets, service worker, CI/deploy; owns T06-T08, T16-T18.
+All: T21 content/security review. R3 must not be the sole reviewer of their own factual transcriptions; another member checks source evidence.
+
+3. PREPARATION AND BLOCKERS
+B01 Confirm event rubric, allowed preparation, build window and any AI mandate. Do not assume runtime AI is required or allowed preparation is unrestricted.
+B02 Photograph a real biscuit label and readable cotton garment tag. Verify construction or explicitly mark it unverified. Unknown bandana is supporting content only.
+B03 Prepare source register and permitted images. One image per stage, at least one reviewed video per journey; record source/creator/rights/date and transcript summary.
+B04 Write concise stage transformations, worker roles/skills and technology notes. Add one work/training note and one resource-efficiency note to each journey.
+B05 Draft 16 core assessment questions total: 2 products x 2 forms x 4 topics. Pre/post items differ and are manually checked for comparable difficulty. Practice can reuse reviewed content.
+B06 Check food claim footnote. If unreadable, use another verified claim; never guess.
+Pre-event code/assets can be prepared only as permitted. If rules disallow preparation, allocate these tasks inside the event and simplify visual polish first.
+
+4. WORK BREAKDOWN
+W01 R4, 1h: scaffold, repository, lockfile, static routes and CI. Depends: event rules. Done: production build loads.
+W02 R3, 1.5h: shared schemas, IDs and sample fixtures. Depends: scope. Done: contracts available to all.
+W03 R1, 2h: explicit main path, bounded arc maths, state adapter. Depends: W02. Done: endpoints and storage fallback tests pass.
+W04 R2, 1.5h: home, journey shell, invalid ID handling. Depends: W01/W02. Done: both cards route.
+W05 R1, 2h: dial drag/tap/keyboard/buttons/reduced motion. Depends: W03. Done: real-phone navigation works.
+W06 R4, 2h: image/video component and fallback lifecycle. Depends: W02. Done: no autoplay or orphan audio; blocked-embed fallback works.
+W07 R2, 2h: stage transformation, worker and technology panels. Depends: W02/W04. Done: all stage fields render.
+W08 R3 plus R4, 4h combined: two journeys, source metadata, assets, video review. Depends: B02-B04/W02. Done: required content complete and reviewed.
+W09 R3, 1.5h: cross-reference validator. Depends: W02. Done: deliberate broken fixtures fail.
+W10 R2, 2.5h: food/fabric decoders, evidence dialog, glossary. Depends: W08. Done: values and unknown states match evidence.
+W11 R3, 2.5h: quiz/results using R1 state contract. Depends: W03/B05. Done: modes, run isolation and topic results work.
+W12 R4, 1.5h: precache/offline-ready/version handling. Depends: stable W06/W08/W11. Done: both routes and quizzes work on offline reload.
+W13 All, 2h elapsed: integrated tests, content/privacy checks and phone accessibility. Depends: core integration. Done: T01-T21 pass or release blockers recorded and fixed.
+W14 All, 1.5h elapsed: demo rehearsal, hosted/local checks and backup recording. Depends: release candidate.
+Estimates are planning allowances, not delivery guarantees; tasks can overlap by owner after shared contracts are agreed.
+
+5. CHECKPOINTS
+Hour 0-2: agree scope, roles, schemas and source inventory; scaffold and fixtures.
+Hour 2-6: one garment journey navigates end-to-end with images and worker context. CHECKPOINT A: real phone reaches every stage.
+Hour 6-10: reuse engine for biscuit; stage media lifecycle and evidence UI. CHECKPOINT B: both journeys plus one video resource each work.
+Hour 10-15: complete decoders, glossary and assessment. CHECKPOINT C: catalogue-to-results works for both products.
+Hour 15-19: finish validator, review, offline core and accessibility. Freeze features at hour 19.
+Hour 19-22: run T01-T21, fix failures and deploy release candidate.
+Hour 22-24: rehearse, record fallback, tag build and verify final URL/local preview.
+If prepared content is unavailable, re-estimate before promising this timetable. Content review is a critical path, not leftover work.
+
+6. RELEASE CHECKLIST
+Functional: T01-T15. Resilience/privacy: T16-T17. Performance/accessibility: T18-T19. Integrity/security: T20-T21. Stretch comparison: T22 only if included.
+Record results with device/browser, test date, build/content version, pass/fail and brief evidence. Test actual video stop behaviour, not only the absence of a visible player. Review rights/source metadata manually.
+A remaining failure in required content accuracy, core navigation, quiz scoring, keyboard access or offline readiness blocks the claim that the core MVP is complete.
+
+7. CONTINGENCIES AND CUT ORDER
+Cut first: optional comparison/per-serve toggle, extra videos, extra practice questions, custom animation and decorative scenes.
+Do not cut: two verified primary products; stage image/text; workers/technology context; at least one video resource per journey; evidence access; short checks; basic accessibility and cached core.
+Embed blocked: use external link plus summary. Image source unsuitable: use an original permitted illustration labelled as generic. Tag unavailable: select another labelled garment. Network down: cached image/text demo; honestly explain remote video cannot play.
+Dial drag bug: use working tap/keyboard/buttons while fixing; do not declare T04 passed if drag remains required and broken. Offline failure: fix or disclose incomplete status; a recorded demo does not establish offline support.
+
+8. WORKING AGREEMENTS
+Main branch remains buildable. Schemas merge first; UI uses matching fixtures until content arrives. Small PRs with one reviewer, separate folders and a named owner for shared routes. Run validation/typecheck/tests/build before merge. No late feature additions after freeze.
+
+9. DEMO SCRIPT
+Open garment -> rewind to fabric formation -> inspect before/after transformation and image -> play its video -> show worker task/skill and machinery note -> open actual garment evidence and care explanation -> answer a short learning check -> show local result.
+Open biscuit -> rewind to baking/mixing -> show different media/content in the same component -> inspect one verified label fact and its source -> explain how this teaches workers/innovation without claiming real factory impact.
+State clearly that the process is typical, the label facts are verified for the demo item, and videos may be third-party resources.
+
+10. POST-EVENT VALIDATION
+Run the PRD exploratory pilot; collect consent-appropriate feedback without unnecessary personal details. Record observed confusion and actual pre/post responses; report small-sample limitations. Prioritise fixes based on these findings before considering simulations, dashboards or AI additions.
